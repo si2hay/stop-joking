@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Газпром Колледж</title>
+    <title>Учебный Портал</title>
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230079C2'/><path d='M50 25 L80 40 L50 55 L20 40 Z' fill='white'/><path d='M30 48 L30 65 Q30 75 50 75 Q70 75 70 65 L70 48' fill='none' stroke='white' stroke-width='8'/></svg>">
     
@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- ИКОНКИ С НАДЕЖНОГО CDN (JSdelivr) -->
+    <!-- ИКОНКИ (надежный CDN) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     
     <style>
@@ -78,14 +78,24 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
         }
         
-        /* --- LIQUID GLASS (ИСПРАВЛЕННЫЙ) --- */
+        /* --- LIQUID GLASS (Оптимизированный) --- */
         .is-glass .glass-card, .is-glass header {
-            /* Темная прозрачная основа для темных тем */
+            /* Темная прозрачная основа */
             background: rgba(10, 17, 32, 0.4) !important; 
-            backdrop-filter: blur(20px) saturate(150%) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+            /* Слегка уменьшили blur для ФПС, но оставили сочность */
+            backdrop-filter: blur(12px) saturate(150%) !important;
+            -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+            
+            /* Оптимизация: заставляем браузер рендерить это на видеокарте */
+            will-change: backdrop-filter;
+        }
+        
+        /* Отключаем прыжок при наведении в режиме стекла, чтобы не было лагов */
+        .is-glass .glass-card:hover {
+            transform: none;
+            box-shadow: 0 0 20px var(--glow) !important;
         }
         
         /* Для светлой темы */
@@ -95,7 +105,7 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
         }
 
-        /* Делаем текст читаемым на стекле с помощью теней */
+        /* Тени для текста на стекле */
         .is-glass .glass-card *, .is-glass header * {
             text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
@@ -103,7 +113,6 @@
             text-shadow: 0 1px 2px rgba(255,255,255,0.9);
         }
 
-        /* Убираем старый блик, который засвечивал экран */
         .is-glass .glass-card::before { display: none; }
 
         @keyframes pulse-glow {
@@ -156,7 +165,7 @@
         .shake { animation: shake 0.5s; }
     </style>
 </head>
-<body class="min-h-screen pb-10 relative overflow-x-hidden flex flex-col font-space" data-theme="gazprom">
+<body class="min-h-screen pb-10 relative overflow-x-hidden flex flex-col font-pixel" data-theme="gazprom">
 
     <canvas id="particles-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
 
@@ -192,7 +201,7 @@
                     <div class="w-8 h-8 rounded-lg flex items-center justify-center shadow-sm transition-transform active:scale-90" style="background-color: var(--brand); color: var(--brand-text);">
                         <i class="fas fa-graduation-cap text-sm"></i>
                     </div>
-                    Газпром Колледж
+                    Учебный Портал
                 </h1>
                 <p class="text-[14px] mt-1 font-bold text-main" id="current-date">Загрузка...</p>
             </div>
@@ -223,13 +232,13 @@
                         </button>
                     </div>
 
-                    <p class="text-[10px] font-bold text-muted uppercase px-2 pb-1 mb-1 border-b" style="border-color: var(--border);">Компании</p>
-                    <button onclick="setTheme('gazprom')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#0079C2]"></span> Газпром</button>
-                    <button onclick="setTheme('sber')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#21A038]"></span> Сбер</button>
-                    <button onclick="setTheme('tinkoff')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#FFDD2D]"></span> Тинькофф</button>
-                    <button onclick="setTheme('vk')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#0077FF]"></span> ВКонтакте</button>
-                    <button onclick="setTheme('rosneft')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#FFCC00]"></span> Роснефть</button>
-                    <button onclick="setTheme('lukoil')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#D31145]"></span> Лукойл</button>
+                    <p class="text-[10px] font-bold text-muted uppercase px-2 pb-1 mb-1 border-b" style="border-color: var(--border);">Цвета</p>
+                    <button onclick="setTheme('gazprom')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#0079C2]"></span> Океан</button>
+                    <button onclick="setTheme('sber')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#21A038]"></span> Изумруд</button>
+                    <button onclick="setTheme('tinkoff')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#FFDD2D]"></span> Янтарь</button>
+                    <button onclick="setTheme('vk')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#0077FF]"></span> Лазурь</button>
+                    <button onclick="setTheme('rosneft')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#FFCC00]"></span> Золото</button>
+                    <button onclick="setTheme('lukoil')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#D31145]"></span> Рубин</button>
                     
                     <p class="text-[10px] font-bold text-muted uppercase px-2 pb-1 mt-2 mb-1 border-b" style="border-color: var(--border);">Игры</p>
                     <button onclick="setTheme('minecraft')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-cube text-[#5b8731] w-3 text-center"></i> Minecraft</button>
@@ -309,7 +318,7 @@
             </div>
             <div class="relative z-10">
                 <h2 class="text-xl font-black mb-1" style="color: var(--brand-text); text-shadow: 0 2px 4px rgba(0,0,0,0.2);">PDF Расписания и Замены</h2>
-                <p class="text-sm font-medium mb-4" style="color: var(--brand-text); opacity: 0.9;">Официальные файлы колледжа</p>
+                <p class="text-sm font-medium mb-4" style="color: var(--brand-text); opacity: 0.9;">Официальные файлы</p>
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold shadow-md transition-all group-hover:scale-105" style="background-color: rgba(0,0,0,0.2); color: white; backdrop-filter: blur(4px);">
                     Перейти на сайт <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
                 </div>
@@ -360,7 +369,7 @@
             <i class="fab fa-telegram-plane"></i> Идеи: @si2hay
         </a>
         <p class="text-[10px] text-slate-500 max-w-[250px] leading-tight text-center opacity-70">
-            Сайт неофициальный. Всегда сверяйтесь с актуальным расписанием на официальном сайте колледжа.
+            Сайт неофициальный. Всегда сверяйтесь с актуальным расписанием на официальном сайте.
         </p>
     </footer>
 
@@ -418,7 +427,8 @@
             document.getElementById('secret-theme-container').classList.remove('hidden');
         }
 
-        const savedFont = getStorage('app_font') || 'font-space';
+        // Дефолтный шрифт - пиксельный
+        const savedFont = getStorage('app_font') || 'font-pixel';
         document.body.classList.add(savedFont);
 
         if (getStorage('app_glass') === 'true') {
@@ -858,10 +868,12 @@
             }
         }
 
-        // --- 8. ПОГОДА ---
+        // --- 8. ПОГОДА (ЧЕРЕЗ ПРОКСИ, ЧТОБЫ РАБОТАЛО В РФ) ---
         async function fetchWeather() {
             try {
-                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=48.7194&longitude=44.5018&current_weather=true`);
+                const targetUrl = `https://api.open-meteo.com/v1/forecast?latitude=48.7194&longitude=44.5018&current_weather=true`;
+                const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`);
+                
                 if (!res.ok) throw new Error('Network error');
                 
                 const data = await res.json();

@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Учебный Портал</title>
     
-    <!-- ИКОНКА САЙТА (FAVICON) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230079C2'/><path d='M50 25 L80 40 L50 55 L20 40 Z' fill='white'/><path d='M30 48 L30 65 Q30 75 50 75 Q70 75 70 65 L70 48' fill='none' stroke='white' stroke-width='8'/></svg>">
     
-    <!-- МЕТА-ТЕГИ ДЛЯ "МИНИ-АПП" -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -17,12 +15,9 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- ШРИФТЫ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- ИКОНКИ -->
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400;700&family=Russo+One&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     
     <style>
@@ -33,98 +28,61 @@
             font-style: normal;
         }
 
-        /* --- ПЕРЕМЕННЫЕ ТЕМ --- */
+        /* --- ПЕРЕМЕННЫЕ ТЕМ (Зацензурены) --- */
         :root {
-            --bg-body: #0a1120; --bg-card: #151f32; --bg-hover: #1e2a40;
+            --bg-body: #0a1120; --bg-card: rgba(21, 31, 50, 0.85); --bg-hover: #1e2a40;
             --text-main: #f8fafc; --text-muted: #94a3b8; --border: #1e293b;
             --brand: #0079C2; --brand-text: #ffffff; --glow: rgba(0, 121, 194, 0.4);
         }
-        [data-theme="sber"] { --bg-body: #0a110d; --bg-card: #111f16; --bg-hover: #1a2c20; --text-main: #ffffff; --text-muted: #86efac; --border: #1e3a29; --brand: #21A038; --brand-text: #ffffff; --glow: rgba(33, 160, 56, 0.4); }
-        [data-theme="tinkoff"] { --bg-body: #1c1c1e; --bg-card: #2c2c2e; --bg-hover: #3a3a3c; --text-main: #ffffff; --text-muted: #a1a1aa; --border: #3a3a3c; --brand: #FFDD2D; --brand-text: #000000; --glow: rgba(255, 221, 45, 0.3); }
-        [data-theme="vk"] { --bg-body: #19191a; --bg-card: #232324; --bg-hover: #2d2d2e; --text-main: #ffffff; --text-muted: #939393; --border: #333333; --brand: #0077FF; --brand-text: #ffffff; --glow: rgba(0, 119, 255, 0.4); }
-        [data-theme="rosneft"] { --bg-body: #121212; --bg-card: #1e1e1e; --bg-hover: #2a2a2a; --text-main: #ffffff; --text-muted: #a3a3a3; --border: #333333; --brand: #FFCC00; --brand-text: #000000; --glow: rgba(255, 204, 0, 0.3); }
-        [data-theme="lukoil"] { --bg-body: #1a0b0e; --bg-card: #2b1317; --bg-hover: #3d1a20; --text-main: #ffffff; --text-muted: #fca5a5; --border: #4c1d24; --brand: #D31145; --brand-text: #ffffff; --glow: rgba(211, 17, 69, 0.4); }
-        [data-theme="minecraft"] { --bg-body: #1a1a1a; --bg-card: #2d2d2d; --bg-hover: #3d3d3d; --text-main: #e5e5e5; --text-muted: #a3a3a3; --border: #404040; --brand: #5b8731; --brand-text: #ffffff; --glow: rgba(91, 135, 49, 0.5); }
-        [data-theme="rust"] { --bg-body: #141414; --bg-card: #242424; --bg-hover: #303030; --text-main: #e0e0e0; --text-muted: #8c8c8c; --border: #383838; --brand: #cd412b; --brand-text: #ffffff; --glow: rgba(205, 65, 43, 0.5); }
-        [data-theme="dota"] { --bg-body: #1a0f11; --bg-card: #2b181b; --bg-hover: #3a2024; --text-main: #ffffff; --text-muted: #d4a373; --border: #4a2c30; --brand: #e54b4b; --brand-text: #ffffff; --glow: rgba(229, 75, 75, 0.4); }
-        [data-theme="standoff"] { --bg-body: #121212; --bg-card: #1f1f1f; --bg-hover: #2a2a2a; --text-main: #ffffff; --text-muted: #a1a1aa; --border: #333333; --brand: #ff8c00; --brand-text: #ffffff; --glow: rgba(255, 140, 0, 0.4); }
-        [data-theme="chickengun"] { --bg-body: #1e293b; --bg-card: #334155; --bg-hover: #475569; --text-main: #ffffff; --text-muted: #cbd5e1; --border: #475569; --brand: #f1c40f; --brand-text: #000000; --glow: rgba(241, 196, 15, 0.4); }
-        [data-theme="cyber"] { --bg-body: #09090b; --bg-card: #18181b; --bg-hover: #27272a; --text-main: #fdf4ff; --text-muted: #d8b4fe; --border: #3f3f46; --brand: #d946ef; --brand-text: #ffffff; --glow: rgba(217, 70, 239, 0.4); }
-        [data-theme="light"] { --bg-body: #f1f5f9; --bg-card: #ffffff; --bg-hover: #f8fafc; --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --brand: #3b82f6; --brand-text: #ffffff; --glow: rgba(59, 130, 246, 0.2); }
-        [data-theme="matrix"] { --bg-body: #000000; --bg-card: #0a0a0a; --bg-hover: #111111; --text-main: #00ff41; --text-muted: #008f11; --border: #003b00; --brand: #00ff41; --brand-text: #000000; --glow: rgba(0, 255, 65, 0.5); }
+        [data-theme="green"] { --bg-body: #0a110d; --bg-card: rgba(17, 31, 22, 0.85); --bg-hover: #1a2c20; --text-main: #ffffff; --text-muted: #86efac; --border: #1e3a29; --brand: #21A038; --brand-text: #ffffff; --glow: rgba(33, 160, 56, 0.4); }
+        [data-theme="yellow"] { --bg-body: #1c1c1e; --bg-card: rgba(44, 44, 46, 0.85); --bg-hover: #3a3a3c; --text-main: #ffffff; --text-muted: #a1a1aa; --border: #3a3a3c; --brand: #FFDD2D; --brand-text: #000000; --glow: rgba(255, 221, 45, 0.3); }
+        [data-theme="azure"] { --bg-body: #19191a; --bg-card: rgba(35, 35, 36, 0.85); --bg-hover: #2d2d2e; --text-main: #ffffff; --text-muted: #939393; --border: #333333; --brand: #0077FF; --brand-text: #ffffff; --glow: rgba(0, 119, 255, 0.4); }
+        [data-theme="gold"] { --bg-body: #121212; --bg-card: rgba(30, 30, 30, 0.85); --bg-hover: #2a2a2a; --text-main: #ffffff; --text-muted: #a3a3a3; --border: #333333; --brand: #FFCC00; --brand-text: #000000; --glow: rgba(255, 204, 0, 0.3); }
+        [data-theme="red"] { --bg-body: #1a0b0e; --bg-card: rgba(43, 19, 23, 0.85); --bg-hover: #3d1a20; --text-main: #ffffff; --text-muted: #fca5a5; --border: #4c1d24; --brand: #D31145; --brand-text: #ffffff; --glow: rgba(211, 17, 69, 0.4); }
+        [data-theme="minecraft"] { --bg-body: #1a1a1a; --bg-card: rgba(45, 45, 45, 0.85); --bg-hover: #3d3d3d; --text-main: #e5e5e5; --text-muted: #a3a3a3; --border: #404040; --brand: #5b8731; --brand-text: #ffffff; --glow: rgba(91, 135, 49, 0.5); }
+        [data-theme="dota"] { --bg-body: #1a1010; --bg-card: rgba(40, 20, 20, 0.85); --bg-hover: #331a1a; --text-main: #f5f5f5; --text-muted: #d4a3a3; --border: #4a1a1a; --brand: #b31919; --brand-text: #ffffff; --glow: rgba(179, 25, 25, 0.5); }
+        [data-theme="standoff"] { --bg-body: #0a0a0a; --bg-card: rgba(25, 25, 25, 0.85); --bg-hover: #1f1f1f; --text-main: #ffffff; --text-muted: #a3a3a3; --border: #333333; --brand: #ff7f00; --brand-text: #000000; --glow: rgba(255, 127, 0, 0.4); }
+        [data-theme="chicken"] { --bg-body: #1a202c; --bg-card: rgba(26, 32, 44, 0.85); --bg-hover: #2d3748; --text-main: #f7fafc; --text-muted: #a0aec0; --border: #4a5568; --brand: #facc15; --brand-text: #1a202c; --glow: rgba(250, 204, 21, 0.4); }
+        [data-theme="cyber"] { --bg-body: #09090b; --bg-card: rgba(24, 24, 27, 0.85); --bg-hover: #27272a; --text-main: #fdf4ff; --text-muted: #d8b4fe; --border: #3f3f46; --brand: #d946ef; --brand-text: #ffffff; --glow: rgba(217, 70, 239, 0.4); }
+        [data-theme="light"] { --bg-body: #f1f5f9; --bg-card: rgba(255, 255, 255, 0.9); --bg-hover: #f8fafc; --text-main: #0f172a; --text-muted: #64748b; --border: #cbd5e1; --brand: #3b82f6; --brand-text: #ffffff; --glow: rgba(59, 130, 246, 0.2); }
+        [data-theme="matrix"] { --bg-body: #000000; --bg-card: rgba(10, 10, 10, 0.85); --bg-hover: #111111; --text-main: #00ff41; --text-muted: #008f11; --border: #003b00; --brand: #00ff41; --brand-text: #000000; --glow: rgba(0, 255, 65, 0.5); }
 
-        /* --- ШРИФТЫ --- */
+        /* --- ГЛОБАЛЬНЫЕ СТИЛИ --- */
+        * {
+            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
+        }
+        
         body { 
             font-family: 'Space Grotesk', sans-serif; 
             -webkit-font-smoothing: antialiased; 
             background-color: var(--bg-body); color: var(--text-main); 
-            transition: background-color 0.3s ease, color 0.3s ease;
             padding-top: env(safe-area-inset-top);
             padding-bottom: env(safe-area-inset-bottom);
         }
         
-        .font-pixel { 
-            font-family: 'Monocraft', monospace !important; 
-            font-size: 1.15em; 
-            letter-spacing: 0.5px;
-            line-height: 1.5;
-            -webkit-font-smoothing: none;
-        }
+        .font-pixel { font-family: 'Monocraft', monospace !important; font-size: 1.15em; letter-spacing: 0.5px; line-height: 1.5; -webkit-font-smoothing: none; }
+        .font-russo { font-family: 'Russo One', sans-serif !important; letter-spacing: 0.5px; }
+        .font-jura { font-family: 'Jura', sans-serif !important; letter-spacing: 0.5px; }
 
-        /* --- БАЗОВЫЕ КАРТОЧКИ --- */
+        /* --- СТЕКЛО --- */
         .glass-card { 
-            background: linear-gradient(145deg, var(--bg-card), var(--bg-body));
+            background: var(--bg-card);
+            backdrop-filter: blur(12px) saturate(150%);
+            -webkit-backdrop-filter: blur(12px) saturate(150%);
             border: 1px solid var(--border); 
-            transition: all 0.3s ease;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
         }
-        .glass-card:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-        }
+        [data-theme="light"] .glass-card { background: var(--bg-card); }
         
-        /* --- LIQUID GLASS --- */
-        .is-glass .glass-card, .is-glass header, .is-glass #beta-modal {
-            background: rgba(10, 17, 32, 0.4) !important; 
-            backdrop-filter: blur(10px) saturate(150%) !important;
-            -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
-            will-change: backdrop-filter, transform;
-            transform: translateZ(0);
-        }
-        
-        .is-glass .glass-card:hover {
-            transform: none;
-            box-shadow: 0 0 20px var(--glow) !important;
-        }
-        
-        .is-glass[data-theme="light"] .glass-card, .is-glass[data-theme="light"] header, .is-glass[data-theme="light"] #beta-modal {
-            background: rgba(255, 255, 255, 0.5) !important;
-            border: 1px solid rgba(255, 255, 255, 0.6) !important;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
+        body[data-glass="false"] .glass-card {
+            background: var(--bg-body) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
         }
 
-        .is-glass .glass-card *, .is-glass header * {
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-        }
-        .is-glass[data-theme="light"] .glass-card *, .is-glass[data-theme="light"] header * {
-            text-shadow: 0 1px 2px rgba(255,255,255,0.9);
-        }
-
-        .is-glass .glass-card::before { display: none; }
-
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 5px var(--glow); }
-            50% { box-shadow: 0 0 20px var(--glow); }
-            100% { box-shadow: 0 0 5px var(--glow); }
-        }
-        .active-pair {
-            border-color: var(--brand) !important;
-            animation: pulse-glow 2s infinite;
-        }
+        /* --- АНИМАЦИИ --- */
+        @keyframes pulse-glow { 0% { box-shadow: 0 0 5px var(--glow); } 50% { box-shadow: 0 0 20px var(--glow); } 100% { box-shadow: 0 0 5px var(--glow); } }
+        .active-pair { border-color: var(--brand) !important; animation: pulse-glow 2s infinite; transform: scale(1.02); z-index: 10; position: relative; }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-up { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
@@ -139,135 +97,309 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
-        #zen-overlay, #beta-modal {
+        /* --- ОВЕРЛЕИ --- */
+        .full-overlay {
             position: fixed; inset: 0; z-index: 9999;
             background-color: var(--bg-body);
             display: flex; flex-direction: column; align-items: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease, background-color 0.4s ease;
             overflow-y: auto;
         }
-        #zen-overlay.active, #beta-modal.active { opacity: 1; pointer-events: auto; }
+        .full-overlay.active { opacity: 1; pointer-events: auto; }
         
-        .hourglass-container { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
-        .hourglass-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        #notes-area {
+            width: 100%; min-height: 200px; flex-1; background: transparent; border: none; outline: none; resize: none;
+            color: var(--text-main); font-family: inherit; font-size: 1.1rem; line-height: 1.6;
         }
+        
+        @keyframes shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(3px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(3px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(1px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
         .shake { animation: shake 0.5s; }
     </style>
 </head>
-<body class="min-h-screen pb-10 relative overflow-x-hidden flex flex-col font-pixel" data-theme="gazprom">
+<body class="min-h-screen pb-10 relative overflow-x-hidden flex flex-col" data-theme="gazprom" data-glass="true">
 
+    <!-- ФОН -->
     <canvas id="particles-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
 
+    <!-- ========================================== -->
+    <!-- БАЗА ДАННЫХ (РЕДАКТИРУЙ ЗДЕСЬ) -->
+    <!-- ========================================== -->
+    <script>
+        const DATABASE = {
+            // Звонки. Время пар разбито на 1 и 2 часть, между ними перемена.
+            bells: {
+                monday: [
+                    { num: 0, start: '09:20', end: '10:05', h1_start: '09:20', h1_end: '10:05', h2_start: '', h2_end: '', label: 'Разговоры о важном' },
+                    { isBreak: true, start: '10:05', end: '10:15', label: 'Перемена' },
+                    { num: 1, start: '10:15', end: '12:15', h1_start: '10:15', h1_end: '11:00', h2_start: '11:30', h2_end: '12:15' },
+                    { isBreak: true, start: '11:00', end: '11:30', label: 'Обед' },
+                    { isBreak: true, start: '12:15', end: '12:25', label: 'Перемена' },
+                    { num: 2, start: '12:25', end: '14:00', h1_start: '12:25', h1_end: '13:10', h2_start: '13:15', h2_end: '14:00' },
+                    { isBreak: true, start: '13:10', end: '13:15', label: 'Перемена' },
+                    { isBreak: true, start: '14:00', end: '14:10', label: 'Перемена' },
+                    { num: 3, start: '14:10', end: '15:45', h1_start: '14:10', h1_end: '14:55', h2_start: '15:00', h2_end: '15:45' },
+                    { isBreak: true, start: '14:55', end: '15:00', label: 'Перемена' },
+                    { isBreak: true, start: '15:45', end: '16:15', label: 'Обед' },
+                    { num: 4, start: '16:15', end: '17:50', h1_start: '16:15', h1_end: '17:00', h2_start: '17:05', h2_end: '17:50' },
+                    { isBreak: true, start: '17:00', end: '17:05', label: 'Перемена' }
+                ],
+                otherDays: [
+                    { num: 1, start: '08:30', end: '10:05', h1_start: '08:30', h1_end: '09:15', h2_start: '09:20', h2_end: '10:05' },
+                    { isBreak: true, start: '10:05', end: '10:15', label: 'Перемена' },
+                    { num: 2, start: '10:15', end: '12:15', h1_start: '10:15', h1_end: '11:00', h2_start: '11:30', h2_end: '12:15' },
+                    { isBreak: true, start: '11:00', end: '11:30', label: 'Обед' },
+                    { isBreak: true, start: '12:15', end: '12:25', label: 'Перемена' },
+                    { num: 3, start: '12:25', end: '14:00', h1_start: '12:25', h1_end: '13:10', h2_start: '13:15', h2_end: '14:00' },
+                    { isBreak: true, start: '13:10', end: '13:15', label: 'Перемена' },
+                    { isBreak: true, start: '14:00', end: '14:10', label: 'Перемена' },
+                    { num: 4, start: '14:10', end: '15:45', h1_start: '14:10', h1_end: '14:55', h2_start: '15:00', h2_end: '15:45' },
+                    { isBreak: true, start: '14:55', end: '15:00', label: 'Перемена' },
+                    { isBreak: true, start: '15:45', end: '16:15', label: 'Обед' },
+                    { num: 5, start: '16:15', end: '17:50', h1_start: '16:15', h1_end: '17:00', h2_start: '17:05', h2_end: '17:50' },
+                    { isBreak: true, start: '17:00', end: '17:05', label: 'Перемена' }
+                ]
+            },
+
+            // РАСПИСАНИЕ ГРУПП. 26 - это год поступления (1 курс).
+            groups: {
+                "26 АТП-2Бо": {
+                    week1: {
+                        "Пн": [
+                            { num: 0, subj: "Разговоры о важном", room: "2-110", teacher: "" },
+                            { num: 1, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                            { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                            { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 4, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." }
+                        ],
+                        "Вт": [
+                            { num: 1, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 2, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
+                            { num: 3, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                            { num: 4, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." }
+                        ],
+                        "Ср": [
+                            { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                            { num: 2, subj: "Рос.-моя ист", room: "2-312", teacher: "Маняев А.Г." },
+                            { num: 3, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                            { num: 4, subj: "Информатика", room: "212", teacher: "Ушакова Е.П." }
+                        ],
+                        "Чт": [
+                            { num: 2, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                            { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 4, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                            { num: 5, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." }
+                        ],
+                        "Пт": [
+                            { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                            { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 3, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                            { num: 4, subj: "Кл. час", room: "", teacher: "" }
+                        ]
+                    },
+                    week2: {
+                        "Пн": [
+                            { num: 0, subj: "Разговоры о важном", room: "2-110", teacher: "" },
+                            { num: 1, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                            { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                            { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 4, subj: "Информатика", room: "212/2-204", teacher: "Ушакова / Резникова" }
+                        ],
+                        "Вт": [
+                            { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                            { num: 2, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                            { num: 3, subj: "Рос.-моя ист", room: "2-312", teacher: "Маняев А.Г." },
+                            { num: 4, subj: "Информатика", room: "212", teacher: "Ушакова Е.П." }
+                        ],
+                        "Ср": [
+                            { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                            { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
+                            { num: 3, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
+                            { num: 4, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." }
+                        ],
+                        "Чт": [
+                            { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
+                            { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 4, subj: "Информатика", room: "212/2-204", teacher: "Ушакова / Резникова" }
+                        ],
+                        "Пт": [
+                            { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                            { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 3, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." },
+                            { num: 4, subj: "Кл. час", room: "", teacher: "" }
+                        ]
+                    }
+                },
+                "26 АТП-3Бо": {
+                    week1: {
+                        "Пн": [
+                            { num: 0, subj: "Разговоры о важном", room: "307", teacher: "" },
+                            { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                            { num: 2, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                            { num: 3, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
+                            { num: 4, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." }
+                        ],
+                        "Вт": [
+                            { num: 1, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
+                            { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 3, subj: "Информатика", room: "212", teacher: "Ушакова Е.П. / Процюк М.П." },
+                            { num: 4, subj: "История", room: "116общ", teacher: "Клепикова Л.П." }
+                        ],
+                        "Ср": [
+                            { num: 1, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 2, subj: "Информатика", room: "212/2-204", teacher: "Ушакова Е.П. / Процюк М.П." },
+                            { num: 3, subj: "Литер.", room: "320общ", teacher: "Невзорова М.С." },
+                            { num: 4, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." }
+                        ],
+                        "Чт": [
+                            { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                            { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 3, subj: "Литер.", room: "320общ", teacher: "Невзорова М.С." },
+                            { num: 4, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 5, subj: "История", room: "116общ", teacher: "Клепикова Л.П." }
+                        ],
+                        "Пт": [
+                            { num: 1, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
+                            { num: 3, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." },
+                            { num: 4, subj: "Кл. час", room: "", teacher: "" }
+                        ]
+                    },
+                    week2: {
+                        "Пн": [
+                            { num: 0, subj: "Разговоры о важном", room: "307", teacher: "" },
+                            { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                            { num: 2, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                            { num: 3, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
+                            { num: 4, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." }
+                        ],
+                        "Вт": [
+                            { num: 1, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
+                            { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 3, subj: "Информатика", room: "212", teacher: "Ушакова Е.П." },
+                            { num: 4, subj: "История", room: "116общ", teacher: "Клепикова Л.П." }
+                        ],
+                        "Ср": [
+                            { num: 1, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                            { num: 2, subj: "Информатика", room: "212/2-204", teacher: "Ушакова / Процюк" },
+                            { num: 3, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                            { num: 4, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." }
+                        ],
+                        "Чт": [
+                            { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                            { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                            { num: 3, subj: "Литер.", room: "320общ", teacher: "Невзорова М.С." },
+                            { num: 4, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." }
+                        ],
+                        "Пт": [
+                            { num: 1, subj: "Литер.", room: "320общ", teacher: "Невзорова М.С." },
+                            { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
+                            { num: 3, subj: "Рос.-моя ист", room: "116общ", teacher: "Клепикова Л.П." },
+                            { num: 4, subj: "Кл. час", room: "", teacher: "" }
+                        ]
+                    }
+                }
+            },
+            consultations: []
+        };
+    </script>
+
     <!-- ДЗЕН-РЕЖИМ -->
-    <div id="zen-overlay">
+    <div id="zen-overlay" class="full-overlay">
         <button onclick="toggleZenMode()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-slate-500/20 text-main flex items-center justify-center hover:bg-slate-500/40 transition-colors">
             <i class="fas fa-times text-xl"></i>
         </button>
-        <p class="text-sm font-bold uppercase tracking-widest text-muted mb-2" id="zen-label">Идет 2 пара</p>
-        <div class="hourglass-container mb-8">
-            <svg class="hourglass-svg" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="var(--border)" stroke-width="8"></circle>
-                <circle id="zen-progress" cx="50" cy="50" r="45" fill="none" stroke="var(--brand)" stroke-width="8" stroke-linecap="round" stroke-dasharray="282.74" stroke-dashoffset="0" class="timer-ring"></circle>
-            </svg>
-            <div class="absolute flex flex-col items-center justify-center">
-                <span class="text-5xl font-black text-main" id="zen-time">00:00</span>
-                <span class="text-sm font-bold text-muted mt-1" id="zen-subtext">минут осталось</span>
+        
+        <div class="flex flex-col items-center justify-center h-full max-w-sm mx-auto text-center px-4">
+            <h2 class="text-2xl font-russo text-main mb-2" id="zen-title">Загрузка...</h2>
+            <p class="text-sm font-bold text-muted mb-8 uppercase tracking-widest" id="zen-subtitle">Пожалуйста, подождите</p>
+
+            <div class="relative w-64 h-64 flex items-center justify-center mb-8">
+                <svg class="w-full h-full transform -rotate-90">
+                    <circle cx="128" cy="128" r="120" fill="none" stroke="var(--border)" stroke-width="8"></circle>
+                    <circle id="zen-progress" cx="128" cy="128" r="120" fill="none" stroke="var(--brand)" stroke-width="8" stroke-linecap="round" stroke-dasharray="753.98" stroke-dashoffset="0" class="timer-ring"></circle>
+                </svg>
+                <div class="absolute flex flex-col items-center justify-center">
+                    <span class="text-5xl font-black text-main font-russo" id="zen-time">00:00</span>
+                </div>
             </div>
+
+            <p class="text-xs text-muted max-w-xs leading-relaxed" id="zen-advice">
+                Сфокусируйся на учебе. Время идет.
+            </p>
         </div>
-        <div class="w-64 bg-slate-500/20 rounded-full h-3 overflow-hidden">
-            <div id="zen-bar" class="h-full bg-brand transition-all duration-1000 ease-linear" style="width: 0%; background-color: var(--brand);"></div>
-        </div>
-        <p class="mt-8 text-xs text-muted max-w-xs text-center">Сфокусируйся на учебе. Время идет.</p>
     </div>
 
     <!-- БЕТА РАСПИСАНИЕ -->
-    <div id="beta-modal">
-        <div class="w-full max-w-md mx-auto p-4 pb-20">
-            <div class="flex items-center justify-between mb-4 pt-4">
-                <div>
-                    <h2 class="text-xl font-bold text-main flex items-center gap-2">
-                        <i class="fas fa-flask" style="color: var(--brand);"></i> Бета-режим
-                    </h2>
-                    <p class="text-[11px] text-red-400 font-bold mt-1">⚠️ Тестовый режим. Возможны неточности.</p>
+    <div id="beta-modal" class="full-overlay">
+        <div class="w-full max-w-md mx-auto p-4 pb-20 h-full flex flex-col">
+            <div class="flex items-center justify-between mb-4 pt-4 shrink-0">
+                <h2 class="text-xl font-bold text-main flex items-center gap-2">
+                    <i class="fas fa-calendar-alt" style="color: var(--brand);"></i> Расписание
+                </h2>
+                <div class="flex gap-2">
+                    <a href="https://volgograd-college.gazprom.ru/ochnaya-forma-obucheniya/" target="_blank" class="w-10 h-10 rounded-full bg-slate-500/20 flex items-center justify-center text-main hover:bg-slate-500/40 transition-colors" title="Сверить с оф. сайтом">
+                        <i class="fas fa-external-link-alt text-sm"></i>
+                    </a>
+                    <button onclick="toggleBeta()" class="w-10 h-10 rounded-full bg-slate-500/20 flex items-center justify-center text-main hover:bg-slate-500/40 transition-colors">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
                 </div>
-                <button onclick="toggleBeta()" class="w-10 h-10 rounded-full bg-slate-500/20 flex items-center justify-center text-main hover:bg-slate-500/40 transition-colors">
-                    <i class="fas fa-times text-lg"></i>
-                </button>
             </div>
 
-            <!-- Переключатель недели и группы -->
-            <div class="relative z-20 mb-4">
+            <div class="relative z-20 mb-4 shrink-0">
                 <div class="glass-card rounded-2xl p-2 flex items-center justify-between border" style="border-color: var(--border);">
-                    <button onclick="setBetaWeek('prev')" class="w-10 h-10 rounded-xl bg-slate-500/10 hover:bg-slate-500/20 flex items-center justify-center text-main transition-colors active:scale-95"><i class="fas fa-chevron-left"></i></button>
-                    
+                    <button onclick="changeBetaWeek(-1)" class="w-10 h-10 rounded-xl bg-slate-500/10 hover:bg-slate-500/20 flex items-center justify-center text-main transition-colors active:scale-95"><i class="fas fa-chevron-left"></i></button>
                     <button id="beta-group-toggle" onclick="toggleBetaGroupMenu(event)" class="flex-1 py-1 px-2 flex flex-col items-center justify-center rounded-xl hover:bg-slate-500/10 transition-colors">
                         <div class="flex items-center gap-1.5">
                             <span class="font-bold text-main text-[15px]" id="beta-group-label">26 АТП-2Бо</span>
                             <i class="fas fa-chevron-down text-[10px] text-muted transition-transform duration-300" id="beta-group-arrow"></i>
                         </div>
-                        <span class="text-[10px] font-bold text-brand" id="beta-week-label">Текущая (1)</span>
+                        <span class="text-[10px] font-bold text-brand" id="beta-week-label">1 неделя</span>
                     </button>
-
-                    <button onclick="setBetaWeek('next')" class="w-10 h-10 rounded-xl bg-slate-500/10 hover:bg-slate-500/20 flex items-center justify-center text-main transition-colors active:scale-95"><i class="fas fa-chevron-right"></i></button>
+                    <button onclick="changeBetaWeek(1)" class="w-10 h-10 rounded-xl bg-slate-500/10 hover:bg-slate-500/20 flex items-center justify-center text-main transition-colors active:scale-95"><i class="fas fa-chevron-right"></i></button>
                 </div>
 
-                <!-- Меню выбора группы -->
-                <div id="beta-group-menu" class="absolute left-0 right-0 top-[100%] mt-1 bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl shadow-2xl p-2 hidden z-50 menu-animate origin-top">
+                <div id="beta-group-menu" class="absolute left-0 right-0 top-[100%] mt-1 bg-[var(--bg-body)] border border-[var(--border)] rounded-2xl shadow-2xl p-2 hidden z-50 menu-animate origin-top">
                     <button onclick="selectBetaGroup('26 АТП-2Бо')" class="w-full text-left p-3 rounded-xl hover:bg-[var(--bg-hover)] transition-colors flex items-center justify-between">
-                        <span class="font-bold text-main text-sm">26 АТП-2Бо</span>
+                        <span class="font-bold text-main text-sm">26 АТП-2Бо (1 курс)</span>
                         <i class="fas fa-check text-brand text-xs" id="check-2bo"></i>
                     </button>
                     <button onclick="selectBetaGroup('26 АТП-3Бо')" class="w-full text-left p-3 rounded-xl hover:bg-[var(--bg-hover)] transition-colors flex items-center justify-between">
-                        <span class="font-bold text-muted text-sm">26 АТП-3Бо</span>
+                        <span class="font-bold text-muted text-sm">26 АТП-3Бо (1 курс)</span>
                         <i class="fas fa-check text-brand text-xs hidden" id="check-3bo"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Таймер беты -->
-            <div class="glass-card rounded-3xl p-4 flex items-center gap-4 mb-4 border" style="border-color: var(--border);">
-                <div class="relative w-12 h-12 shrink-0 flex items-center justify-center">
-                    <svg class="w-full h-full" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="6" class="opacity-10 text-main"></circle>
-                        <circle id="beta-timer-progress" cx="50" cy="50" r="42" fill="none" stroke="var(--brand)" stroke-width="6" stroke-linecap="round" stroke-dasharray="263.89" stroke-dashoffset="0" class="timer-ring"></circle>
-                    </svg>
-                    <div class="absolute inset-0 flex items-center justify-center" style="color: var(--brand);">
-                        <i class="fas fa-hourglass-half text-sm" id="beta-timer-icon"></i>
-                    </div>
+            <div id="beta-content" class="flex-1 overflow-y-auto space-y-4 pr-1 pb-4"></div>
+
+            <button onclick="toggleBeta()" class="mt-2 w-full py-4 shrink-0 rounded-2xl bg-[var(--bg-card)] text-main font-bold text-sm border border-[var(--border)] hover:bg-[var(--bg-hover)] transition-colors flex items-center justify-center gap-2">
+                <i class="fas fa-arrow-left"></i> На главную
+            </button>
+        </div>
+    </div>
+
+    <!-- ЗАМЕТКИ -->
+    <div id="notes-modal" class="full-overlay">
+        <div class="w-full max-w-md mx-auto p-4 pb-6 h-full flex flex-col">
+            <div class="flex items-center justify-between mb-4 pt-4 shrink-0">
+                <div>
+                    <h2 class="text-xl font-bold text-main flex items-center gap-2">
+                        <i class="fas fa-pen text-brand"></i> Мои заметки
+                    </h2>
+                    <p class="text-[11px] text-red-400 mt-1 font-bold"><i class="fas fa-exclamation-triangle"></i> Не забудь сохранить перед выходом!</p>
                 </div>
-                <div class="flex-1">
-                    <p class="text-[10px] font-bold uppercase tracking-wider mb-0.5 text-muted" id="beta-timer-label">Сейчас</p>
-                    <h2 class="text-[15px] font-bold leading-tight text-main" id="beta-timer-title">Загрузка...</h2>
-                    <p class="text-[12px] font-semibold mt-0.5" style="color: var(--brand);" id="beta-timer-countdown">--:--</p>
-                </div>
+                <button onclick="toggleNotes()" class="w-10 h-10 rounded-full bg-slate-500/20 flex items-center justify-center text-main hover:bg-slate-500/40 transition-colors">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
             </div>
-
-            <!-- Список расписания -->
-            <div id="beta-schedule-container" class="space-y-3">
-                <!-- Сюда рендерится расписание -->
+            
+            <div class="glass-card rounded-3xl p-4 flex-1 flex flex-col mb-4 overflow-hidden">
+                <textarea id="notes-area" placeholder="Пиши тут домашки, идеи или что-то важное..."></textarea>
             </div>
-
-            <!-- Кнопка Сверить с оф. сайтом -->
-            <a href="https://volgograd-college.gazprom.ru/ochnaya-forma-obucheniya/" target="_blank" class="mt-6 w-full py-3 rounded-2xl bg-indigo-500/20 text-indigo-400 font-bold text-xs border border-indigo-500/30 hover:bg-indigo-500/30 transition-colors flex items-center justify-center gap-2">
-                <i class="fas fa-external-link-alt"></i> Сверить с оф. сайтом и заменами
-            </a>
-
-            <!-- Кнопка Назад -->
-            <button onclick="toggleBeta()" class="mt-3 w-full py-4 rounded-2xl bg-slate-800 text-main font-bold text-sm border border-slate-700 hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
-                <i class="fas fa-arrow-left"></i> Вернуться на главную
+            
+            <button onclick="saveAndCloseNotes()" class="w-full shrink-0 py-4 rounded-2xl bg-brand font-bold text-sm shadow-xl hover:opacity-90 transition-opacity flex items-center justify-center gap-2" style="color: var(--brand-text);">
+                <i class="fas fa-save"></i> Сохранить и выйти
             </button>
         </div>
     </div>
@@ -298,40 +430,43 @@
                 <!-- Меню настроек -->
                 <div id="theme-menu" class="absolute right-0 top-12 w-64 rounded-xl shadow-2xl border p-2 hidden z-50 glass-card menu-animate origin-top-right max-h-[85vh] overflow-y-auto">
                     
-                    <p class="text-[10px] font-bold text-muted uppercase px-2 pb-1 mb-1 border-b" style="border-color: var(--border);">Шрифт</p>
+                    <p class="text-[10px] font-bold text-muted uppercase px-2 pb-1 mb-1 border-b" style="border-color: var(--border);">Эффекты</p>
                     <div class="flex gap-2 px-2 mb-3">
-                        <button onclick="setFont('font-space')" class="flex-1 py-1.5 text-xs font-bold rounded-lg border hover:bg-slate-500/10 active:scale-95 transition-all" style="border-color: var(--border);">Space</button>
-                        <button onclick="setFont('font-pixel')" class="flex-1 py-1.5 text-sm font-bold rounded-lg border hover:bg-slate-500/10 active:scale-95 transition-all" style="border-color: var(--border);">Pixel</button>
+                        <button onclick="toggleGlass()" id="glass-btn" class="flex-1 py-1.5 text-xs font-bold rounded-lg border hover:bg-slate-500/10 active:scale-95 transition-all" style="border-color: var(--border); background-color: var(--brand); color: var(--brand-text);">Стекло: Вкл</button>
                     </div>
 
-                    <p class="text-[10px] font-bold text-muted uppercase px-2 pb-1 mb-1 border-b" style="border-color: var(--border);">Эффект</p>
-                    <div class="px-2 mb-3">
-                        <button onclick="toggleGlass()" class="w-full py-2 text-xs font-bold rounded-lg border hover:bg-slate-500/10 active:scale-95 transition-all flex items-center justify-center gap-2" style="border-color: var(--border);">
-                            <i class="fas fa-layer-group"></i> Liquid Glass
-                        </button>
+                    <p class="text-[10px] font-bold text-muted uppercase px-2 pb-1 mb-1 border-b" style="border-color: var(--border);">Шрифт</p>
+                    <div class="flex flex-col gap-1 px-2 mb-3">
+                        <button onclick="setFont('font-space')" class="w-full py-1.5 text-xs font-bold rounded-lg border hover:bg-slate-500/10 active:scale-95 transition-all text-left px-3" style="border-color: var(--border); font-family: 'Space Grotesk';">Space Grotesk</button>
+                        <button onclick="setFont('font-pixel')" class="w-full py-1.5 text-xs font-bold rounded-lg border hover:bg-slate-500/10 active:scale-95 transition-all text-left px-3" style="border-color: var(--border); font-family: 'Monocraft';">Pixel (Minecraft)</button>
+                        <button onclick="setFont('font-russo')" class="w-full py-1.5 text-xs font-bold rounded-lg border hover:bg-slate-500/10 active:scale-95 transition-all text-left px-3" style="border-color: var(--border); font-family: 'Russo One';">Russo One (Gamer)</button>
+                        <button onclick="setFont('font-jura')" class="w-full py-1.5 text-xs font-bold rounded-lg border hover:bg-slate-500/10 active:scale-95 transition-all text-left px-3" style="border-color: var(--border); font-family: 'Jura';">Jura (Cyber)</button>
                     </div>
 
                     <p class="text-[10px] font-bold text-muted uppercase px-2 pb-1 mb-1 border-b" style="border-color: var(--border);">Цвета</p>
-                    <button onclick="setTheme('gazprom')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#0079C2]"></span> Океан</button>
-                    <button onclick="setTheme('sber')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#21A038]"></span> Изумруд</button>
-                    <button onclick="setTheme('tinkoff')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#FFDD2D]"></span> Янтарь</button>
-                    <button onclick="setTheme('vk')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#0077FF]"></span> Лазурь</button>
-                    <button onclick="setTheme('rosneft')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#FFCC00]"></span> Золото</button>
-                    <button onclick="setTheme('lukoil')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#D31145]"></span> Рубин</button>
+                    <div class="grid grid-cols-2 gap-1 px-1">
+                        <button onclick="setTheme('gazprom')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#0079C2]"></span> Синий</button>
+                        <button onclick="setTheme('green')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#21A038]"></span> Изумруд</button>
+                        <button onclick="setTheme('yellow')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#FFDD2D]"></span> Янтарь</button>
+                        <button onclick="setTheme('azure')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#0077FF]"></span> Лазурь</button>
+                        <button onclick="setTheme('gold')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#FFCC00]"></span> Золото</button>
+                        <button onclick="setTheme('red')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><span class="w-3 h-3 rounded-full bg-[#D31145]"></span> Рубин</button>
+                    </div>
                     
                     <p class="text-[10px] font-bold text-muted uppercase px-2 pb-1 mt-2 mb-1 border-b" style="border-color: var(--border);">Игры</p>
-                    <button onclick="setTheme('minecraft')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-cube text-[#5b8731] w-3 text-center"></i> Minecraft</button>
-                    <button onclick="setTheme('rust')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-radiation text-[#cd412b] w-3 text-center"></i> Rust</button>
-                    <button onclick="setTheme('dota')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-fire text-[#e54b4b] w-3 text-center"></i> Dota 2</button>
-                    <button onclick="setTheme('standoff')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-crosshairs text-[#ff8c00] w-3 text-center"></i> Standoff 2</button>
-                    <button onclick="setTheme('chickengun')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-drumstick-bite text-[#f1c40f] w-3 text-center"></i> Chicken Gun</button>
+                    <div class="grid grid-cols-2 gap-1 px-1">
+                        <button onclick="setTheme('minecraft')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-cube text-[#5b8731] w-3 text-center"></i> Minecraft</button>
+                        <button onclick="setTheme('dota')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-fire text-[#b31919] w-3 text-center"></i> Dota 2</button>
+                        <button onclick="setTheme('standoff')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-crosshairs text-[#ff7f00] w-3 text-center"></i> Standoff 2</button>
+                        <button onclick="setTheme('chicken')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-drumstick-bite text-[#facc15] w-3 text-center"></i> Chicken Gun</button>
+                        <button onclick="setTheme('cyber')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-robot text-[#d946ef] w-3 text-center"></i> Cyberpunk</button>
+                    </div>
 
                     <p class="text-[10px] font-bold text-muted uppercase px-2 pb-1 mt-2 mb-1 border-b" style="border-color: var(--border);">Другие</p>
-                    <button onclick="setTheme('cyber')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-robot text-[#d946ef] w-3 text-center"></i> Cyberpunk</button>
-                    <button onclick="setTheme('light')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-sun text-[#3b82f6] w-3 text-center"></i> Светлая</button>
+                    <button onclick="setTheme('light')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-sun text-[#3b82f6] w-3 text-center"></i> Светлая</button>
                     
                     <div id="secret-theme-container" class="hidden border-t mt-2 pt-1" style="border-color: var(--border);">
-                        <button onclick="setTheme('matrix')" class="w-full text-left px-3 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-terminal text-[#00ff41] w-3 text-center"></i> Matrix</button>
+                        <button onclick="setTheme('matrix')" class="w-full text-left px-2 py-1.5 text-xs font-bold rounded-lg hover:bg-slate-500/10 flex items-center gap-2 active:scale-95 transition-transform"><i class="fas fa-terminal text-[#00ff41] w-3 text-center"></i> Matrix</button>
                     </div>
                 </div>
             </div>
@@ -340,7 +475,7 @@
 
     <main class="max-w-md mx-auto px-4 mt-5 space-y-4 relative z-10 flex-grow w-full main-content">
 
-        <button id="install-pwa-btn" class="hidden w-full py-3 rounded-2xl btn-brand font-bold text-sm shadow-xl animate-fade-up flex items-center justify-center gap-2">
+        <button id="install-pwa-btn" class="hidden w-full py-3 rounded-2xl bg-brand font-bold text-sm shadow-xl animate-fade-up flex items-center justify-center gap-2" style="color: var(--brand-text);">
             <i class="fas fa-download"></i> Установить на телефон
         </button>
 
@@ -368,19 +503,13 @@
         </div>
 
         <!-- ПОГОДА -->
-        <div class="glass-card rounded-3xl p-4 animate-fade-up delay-1 relative">
+        <div class="glass-card rounded-3xl p-4 animate-fade-up delay-1">
             <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center gap-2">
                     <i class="fas fa-map-marker-alt text-[11px]" style="color: var(--brand);"></i>
                     <span class="text-[11px] font-bold uppercase text-muted">Волгоград</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <select id="weather-source" class="text-[10px] bg-transparent border-none text-muted font-bold focus:ring-0 cursor-pointer" onchange="fetchWeather()">
-                        <option value="wttr">wttr.in</option>
-                        <option value="open-meteo">Open-Meteo</option>
-                    </select>
-                    <div class="text-[14px] font-bold text-main" id="weather-temp">--°</div>
-                </div>
+                <div class="text-[14px] font-bold text-main" id="weather-temp">--°</div>
             </div>
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2">
@@ -394,7 +523,7 @@
             </div>
         </div>
 
-        <!-- ГЛАВНАЯ КНОПКА (PDF) -->
+        <!-- ГЛАВНАЯ КНОПКА -->
         <a href="https://volgograd-college.gazprom.ru/ochnaya-forma-obucheniya/" target="_blank"
            class="group block relative overflow-hidden rounded-3xl p-5 animate-fade-up delay-2 active:scale-[0.98] transition-all border-2"
            style="background: linear-gradient(135deg, var(--brand), var(--bg-hover)); border-color: var(--brand); box-shadow: 0 10px 25px -5px var(--glow);">
@@ -403,61 +532,69 @@
             </div>
             <div class="relative z-10">
                 <h2 class="text-xl font-black mb-1" style="color: var(--brand-text); text-shadow: 0 2px 4px rgba(0,0,0,0.2);">PDF Расписания и Замены</h2>
-                <p class="text-sm font-medium mb-4" style="color: var(--brand-text); opacity: 0.9;">Официальные файлы</p>
+                <p class="text-sm font-medium mb-4" style="color: var(--brand-text); opacity: 0.9;">Официальные файлы колледжа</p>
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold shadow-md transition-all group-hover:scale-105" style="background-color: rgba(0,0,0,0.2); color: white; backdrop-filter: blur(4px);">
                     Перейти на сайт <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
                 </div>
             </div>
         </a>
 
-        <!-- КНОПКА БЕТА -->
-        <button onclick="toggleBeta()" class="w-full glass-card rounded-2xl p-4 flex items-center justify-between animate-fade-up delay-2 active:scale-[0.98] transition-all border" style="border-color: var(--border);">
-            <div class="flex items-center gap-3">
+        <!-- КНОПКИ БЕТА И ЗАМЕТКИ -->
+        <div class="grid grid-cols-2 gap-3 animate-fade-up delay-2">
+            <button onclick="toggleBeta()" class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center gap-2 active:scale-[0.98] transition-all border" style="border-color: var(--border);">
                 <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-indigo-500/20 text-indigo-400">
-                    <i class="fas fa-flask text-lg"></i>
+                    <i class="fas fa-calendar-alt text-lg"></i>
                 </div>
-                <div class="text-left">
-                    <h3 class="font-bold text-main text-[15px] flex items-center gap-2">Пробное расписание <span class="bg-indigo-500 text-white text-[9px] px-1.5 py-0.5 rounded uppercase font-bold">Beta</span></h3>
-                    <p class="text-[11px] text-muted mt-0.5">26 АТП-2Бо • Тестовый режим</p>
+                <div class="text-center">
+                    <h3 class="font-bold text-main text-sm">Расписание <span class="bg-indigo-500 text-white text-[8px] px-1 py-0.5 rounded uppercase font-bold">Beta</span></h3>
                 </div>
-            </div>
-            <i class="fas fa-chevron-right text-muted"></i>
-        </button>
+            </button>
 
-        <!-- ЗВОНКИ (ОСНОВНЫЕ) -->
-        <div class="glass-card rounded-3xl p-4 animate-fade-up delay-3">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="text-[14px] font-bold flex items-center gap-2 text-main">
-                    <i class="fas fa-bell" style="color: var(--brand);"></i> Расписание звонков
-                </h3>
-                <div class="flex rounded-lg p-0.5" style="background-color: var(--bg-body); border: 1px solid var(--border);">
-                    <button onclick="switchCourse('1')" id="btn-c1" class="px-3 py-1.5 text-[12px] font-bold rounded-md transition-all active:scale-95">1 курс</button>
-                    <button onclick="switchCourse('2')" id="btn-c2" class="px-3 py-1.5 text-[12px] font-bold rounded-md transition-all active:scale-95">2-4 курс</button>
+            <button onclick="toggleNotes()" class="glass-card rounded-2xl p-4 flex flex-col items-center justify-center gap-2 active:scale-[0.98] transition-all border" style="border-color: var(--border);">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-emerald-500/20 text-emerald-400">
+                    <i class="fas fa-pen text-lg"></i>
                 </div>
-            </div>
-            <div id="bells-container" class="space-y-2 text-sm">
+                <div class="text-center">
+                    <h3 class="font-bold text-main text-sm">Заметки</h3>
+                </div>
+            </button>
+        </div>
+
+        <!-- ЗВОНКИ (Новый дизайн таймлайна) -->
+        <div class="glass-card rounded-3xl p-4 animate-fade-up delay-3">
+            <h3 class="text-[14px] font-bold flex items-center gap-2 text-main mb-3">
+                <i class="fas fa-bell" style="color: var(--brand);"></i> Звонки
+            </h3>
+            <div id="bells-container" class="space-y-1 text-sm">
                 <!-- Заполняется через JS -->
             </div>
         </div>
 
-        <!-- ДОПОЛНИТЕЛЬНО (ЭБС) -->
+        <!-- СПРАВОЧНИК -->
         <div class="glass-card rounded-3xl overflow-hidden animate-fade-up delay-3">
-            <button onclick="toggleExtra()" class="w-full p-4 flex items-center justify-between text-[13px] font-bold text-main hover:bg-slate-500/5 transition-colors">
-                <span><i class="fas fa-book-reader mr-2" style="color: var(--brand);"></i> Дополнительно (Библиотеки)</span>
-                <i class="fas fa-chevron-down text-muted transition-transform" id="extra-icon"></i>
+            <button onclick="toggleDirectory()" class="w-full p-4 flex items-center justify-between text-[13px] font-bold text-main hover:bg-slate-500/5 transition-colors">
+                <span><i class="fas fa-book mr-2" style="color: var(--brand);"></i> Справочник</span>
+                <i class="fas fa-chevron-down text-muted transition-transform" id="dir-icon"></i>
             </button>
-            <div id="extra-content" class="hidden p-4 pt-0 space-y-3 border-t" style="border-color: var(--border);">
-                <p class="text-[11px] font-bold text-muted uppercase tracking-wider mt-2">Электронные библиотеки</p>
+            <div id="directory-content" class="hidden border-t" style="border-color: var(--border);">
+                <div class="p-3">
+                    <div class="flex bg-[var(--bg-hover)] rounded-xl p-1">
+                        <button onclick="switchDirTab('libs')" id="tab-libs" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all bg-[var(--brand)] text-[var(--brand-text)] shadow-sm">Библиотеки</button>
+                        <button onclick="switchDirTab('cons')" id="tab-cons" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-muted hover:text-main">Консультации</button>
+                    </div>
+                </div>
                 
-                <a href="https://e.lanbook.com" target="_blank" class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-500/10 transition-colors">
-                    <div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-500 flex items-center justify-center"><i class="fas fa-leaf"></i></div>
-                    <div><p class="text-[13px] font-bold text-main">ЭБС Лань</p><p class="text-[11px] text-muted">Главная страница</p></div>
-                </a>
-
-                <a href="https://academia-moscow.ru" target="_blank" class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-500/10 transition-colors">
-                    <div class="w-9 h-9 rounded-lg bg-orange-500/20 text-orange-500 flex items-center justify-center"><i class="fas fa-building"></i></div>
-                    <div><p class="text-[13px] font-bold text-main">Академия-Москва</p><p class="text-[11px] text-muted">Издательский центр</p></div>
-                </a>
+                <div id="dir-libs" class="px-4 pb-4 space-y-3">
+                    <a href="https://e.lanbook.com" target="_blank" class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-500/10 transition-colors">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-500 flex items-center justify-center"><i class="fas fa-leaf"></i></div>
+                        <div><p class="text-[13px] font-bold text-main">ЭБС Лань</p><p class="text-[11px] text-muted">Главная страница</p></div>
+                    </a>
+                    <a href="https://academia-moscow.ru" target="_blank" class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-500/10 transition-colors">
+                        <div class="w-9 h-9 rounded-lg bg-orange-500/20 text-orange-500 flex items-center justify-center"><i class="fas fa-building"></i></div>
+                        <div><p class="text-[13px] font-bold text-main">Академия-Москва</p><p class="text-[11px] text-muted">Издательский центр</p></div>
+                    </a>
+                </div>
+                <div id="dir-cons" class="hidden p-4 space-y-2"></div>
             </div>
         </div>
 
@@ -465,7 +602,7 @@
 
     <footer class="relative z-10 mt-6 mb-2 text-center animate-fade-up delay-3 flex flex-col items-center">
         <a href="https://t.me/si2hay" target="_blank" class="inline-flex items-center gap-1.5 text-[12px] font-medium text-muted hover:opacity-100 opacity-60 transition-all active:scale-95 mb-3">
-            <i class="fab fa-telegram-plane"></i> Идеи: @si2hay
+            <i class="fab fa-telegram-plane"></i> Предложить правки: @si2hay
         </a>
         <p class="text-[10px] text-slate-500 max-w-[250px] leading-tight text-center opacity-70">
             Сайт неофициальный. Всегда сверяйтесь с актуальным расписанием на официальном сайте.
@@ -474,94 +611,13 @@
 
     <script>
         // ==========================================
-        // БАЗА ДАННЫХ РАСПИСАНИЯ (БЕТА) - 26 АТП-2Бо и 3Бо
-        // ==========================================
-        const groupsData = {
-            "26 АТП-2Бо": {
-                1: { // Неделя 1
-                    "Понедельник": [
-                        { num: 0, subj: "Разговоры о важном", room: "2-110", teacher: "" },
-                        { num: 1, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
-                        { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
-                        { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                        { num: 4, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." }
-                    ],
-                    "Вторник": [
-                        { num: 1, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                        { num: 2, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
-                        { num: 3, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
-                        { num: 4, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." }
-                    ],
-                    "Среда": [
-                        { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
-                        { num: 2, subj: "Рос.-моя ист", room: "2-312", teacher: "Маняев А.Г." },
-                        { num: 3, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." }
-                    ],
-                    "Четверг": [
-                        { num: 2, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
-                        { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                        { num: 4, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
-                        { num: 5, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." }
-                    ],
-                    "Пятница": [
-                        { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
-                        { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                        { num: 3, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
-                        { num: 4, subj: "Кл. час", room: "", teacher: "" }
-                    ]
-                },
-                2: { // Неделя 2
-                    "Понедельник": [
-                        { num: 0, subj: "Разговоры о важном", room: "2-110", teacher: "" },
-                        { num: 1, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
-                        { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
-                        { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                        { num: 4, subj: "Информатика", room: "212 / 2-204", teacher: "1 п/г: Ушакова Е.П / 2 п/г: Резникова О.С." }
-                    ],
-                    "Вторник": [
-                        { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
-                        { num: 2, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
-                        { num: 3, subj: "Рос.-моя ист", room: "2-312", teacher: "Маняев А.Г." },
-                        { num: 4, subj: "Информатика", room: "212", teacher: "Ушакова Е.П." }
-                    ],
-                    "Среда": [
-                        { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
-                        { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
-                        { num: 3, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
-                        { num: 4, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." }
-                    ],
-                    "Четверг": [
-                        { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
-                        { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                        { num: 4, subj: "Информатика", room: "212 / 2-204", teacher: "1 п/г: Ушакова Е.П / 2 п/г: Резникова О.С." }
-                    ],
-                    "Пятница": [
-                        { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
-                        { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                        { num: 3, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." },
-                        { num: 4, subj: "Кл. час", room: "", teacher: "" }
-                    ]
-                }
-            },
-            "26 АТП-3Бо": {
-                1: { "Понедельник": [], "Вторник": [], "Среда": [], "Четверг": [], "Пятница": [] },
-                2: { "Понедельник": [], "Вторник": [], "Среда": [], "Четверг": [], "Пятница": [] }
-            }
-        };
-
-        let currentBetaGroup = "26 АТП-2Бо";
-        let isBetaGroupMenuOpen = false;
-
+        // ЛОГИКА ПРИЛОЖЕНИЯ
         // ==========================================
 
-        function getStorage(key) {
-            try { return localStorage.getItem(key); } catch(e) { return null; }
-        }
-        function setStorage(key, value) {
-            try { localStorage.setItem(key, value); } catch(e) {}
-        }
+        function getStorage(key) { try { return localStorage.getItem(key); } catch(e) { return null; } }
+        function setStorage(key, value) { try { localStorage.setItem(key, value); } catch(e) {} }
 
-        // --- 1. ТЕМЫ И ШРИФТЫ ---
+        // --- 1. ТЕМЫ, ШРИФТЫ И ЭФФЕКТЫ ---
         const themeMenu = document.getElementById('theme-menu');
         
         function toggleThemeMenu(e) {
@@ -570,44 +626,60 @@
         }
 
         document.addEventListener('click', (e) => {
-            if (!themeMenu.contains(e.target)) {
+            if (!themeMenu.contains(e.target) && !e.target.closest('button[onclick="toggleThemeMenu(event)"]')) {
                 themeMenu.classList.add('hidden');
             }
         });
 
         function setFont(fontClass) {
-            document.body.classList.remove('font-space', 'font-pixel');
+            document.body.classList.remove('font-space', 'font-pixel', 'font-russo', 'font-jura');
             document.body.classList.add(fontClass);
             setStorage('app_font', fontClass);
         }
 
         function toggleGlass() {
-            document.body.classList.toggle('is-glass');
-            const isGlass = document.body.classList.contains('is-glass');
-            setStorage('app_glass', isGlass ? 'true' : 'false');
+            const body = document.body;
+            const btn = document.getElementById('glass-btn');
+            const isGlass = body.getAttribute('data-glass') === 'true';
+            
+            if (isGlass) {
+                body.setAttribute('data-glass', 'false');
+                btn.innerText = 'Стекло: Выкл';
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = 'var(--text-main)';
+                setStorage('app_glass', 'false');
+            } else {
+                body.setAttribute('data-glass', 'true');
+                btn.innerText = 'Стекло: Вкл';
+                btn.style.backgroundColor = 'var(--brand)';
+                btn.style.color = 'var(--brand-text)';
+                setStorage('app_glass', 'true');
+            }
         }
 
         function setTheme(theme) {
             document.body.setAttribute('data-theme', theme);
             setStorage('app_theme', theme);
+            
             if (theme === 'matrix') {
                 document.getElementById('secret-theme-container').classList.remove('hidden');
             }
+            
             initParticles(); 
-            switchCourse(currentCourse); 
+            renderBellsList();
+            updateLiveTimer();
             themeMenu.classList.add('hidden');
         }
 
         const savedTheme = getStorage('app_theme') || 'gazprom';
         document.body.setAttribute('data-theme', savedTheme);
-        if (savedTheme === 'matrix') {
-            document.getElementById('secret-theme-container').classList.remove('hidden');
-        }
-        const savedFont = getStorage('app_font') || 'font-pixel';
+        if (savedTheme === 'matrix') document.getElementById('secret-theme-container').classList.remove('hidden');
+
+        const savedFont = getStorage('app_font') || 'font-space';
         document.body.classList.add(savedFont);
-        if (getStorage('app_glass') === 'true') {
-            document.body.classList.add('is-glass');
-        }
+
+        const savedGlass = getStorage('app_glass') || 'true';
+        if (savedGlass === 'false') setTimeout(() => toggleGlass(), 100);
 
         // --- 2. PWA ---
         let deferredPrompt;
@@ -623,20 +695,16 @@
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    installBtn.classList.add('hidden');
-                }
+                if (outcome === 'accepted') installBtn.classList.add('hidden');
                 deferredPrompt = null;
             }
         });
 
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').catch(err => console.log('SW ошибка:', err));
-            });
+            window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
         }
 
-        // --- 3. НЕДЕЛЯ (ОБЩАЯ) ---
+        // --- 3. НЕДЕЛЯ ---
         const START_DATE = new Date('2026-10-26T00:00:00');
 
         function getCurrentWeekNum() {
@@ -652,18 +720,6 @@
         }
 
         // --- 4. ДЗЕН И БЕТА ---
-        function toggleExtra() {
-            const content = document.getElementById('extra-content');
-            const icon = document.getElementById('extra-icon');
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.classList.add('rotate-180');
-            } else {
-                content.classList.add('hidden');
-                icon.classList.remove('rotate-180');
-            }
-        }
-
         let isZen = false;
         function toggleZenMode() {
             isZen = !isZen;
@@ -679,7 +735,11 @@
         }
 
         let isBetaOpen = false;
-        let betaWeekSelection = 'auto';
+        let currentBetaGroup = "26 АТП-2Бо";
+        let betaWeek = 1;
+        let isBetaGroupMenuOpen = false;
+        const daysArr = ["Пн", "Вт", "Ср", "Чт", "Пт"];
+        const fullDaysArr = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница"];
 
         function toggleBeta() {
             isBetaOpen = !isBetaOpen;
@@ -687,22 +747,9 @@
             if (isBetaOpen) {
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                betaWeekSelection = 'auto';
-                currentBetaGroup = "26 АТП-2Бо";
-                selectBetaGroup(currentBetaGroup); // Сброс на дефолт
-                
-                // Скролл к текущему дню
-                setTimeout(() => {
-                    const today = new Date().getDay();
-                    let focusIndex = today - 1;
-                    const now = new Date();
-                    if (now.getHours() >= 16 || today === 0 || today === 6) {
-                        focusIndex = (focusIndex + 1) % 5;
-                    }
-                    const dayEl = document.getElementById(`beta-day-${focusIndex}`);
-                    if (dayEl) dayEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 300);
-                
+                betaWeek = getCurrentWeekNum();
+                updateBetaUI();
+                renderBetaContent();
             } else {
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
@@ -726,7 +773,7 @@
         document.addEventListener('click', (e) => {
             if (isBetaGroupMenuOpen) {
                 const menu = document.getElementById('beta-group-menu');
-                if (!menu.contains(e.target) && e.target.id !== 'beta-group-toggle') {
+                if (!menu.contains(e.target) && !e.target.closest('#beta-group-toggle')) {
                     menu.classList.add('hidden');
                     document.getElementById('beta-group-arrow').style.transform = 'rotate(0deg)';
                     isBetaGroupMenuOpen = false;
@@ -750,85 +797,84 @@
             document.getElementById('beta-group-arrow').style.transform = 'rotate(0deg)';
             isBetaGroupMenuOpen = false;
             
-            updateBetaWeekUI();
-            renderBetaSchedule();
-            updateBetaTimer();
+            updateBetaUI();
+            renderBetaContent();
         }
 
-        function setBetaWeek(dir) {
-            const current = getCurrentWeekNum();
-            if (dir === 'next') {
-                if (betaWeekSelection === 'auto') betaWeekSelection = current === 1 ? '2' : '1';
-                else if (betaWeekSelection === '1') betaWeekSelection = '2';
-                else if (betaWeekSelection === '2') betaWeekSelection = '1';
-            } else {
-                if (betaWeekSelection === 'auto') betaWeekSelection = current === 1 ? '2' : '1';
-                else if (betaWeekSelection === '1') betaWeekSelection = '2';
-                else if (betaWeekSelection === '2') betaWeekSelection = '1';
-            }
-            updateBetaWeekUI();
-            renderBetaSchedule();
-            updateBetaTimer();
+        function changeBetaWeek(dir) {
+            betaWeek = betaWeek === 1 ? 2 : 1;
+            updateBetaUI();
+            renderBetaContent();
         }
 
-        function updateBetaWeekUI() {
-            const label = document.getElementById('beta-week-label');
-            if (betaWeekSelection === 'auto') {
-                const current = getCurrentWeekNum();
-                label.innerText = `Текущая (${current})`;
-            } else {
-                label.innerText = `Неделя ${betaWeekSelection}`;
-            }
+        function updateBetaUI() {
+            document.getElementById('beta-week-label').innerText = `${betaWeek} неделя`;
         }
 
-        function getBetaWeekNum() {
-            return betaWeekSelection === 'auto' ? getCurrentWeekNum() : parseInt(betaWeekSelection);
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (isZen) toggleZenMode();
-                if (isBetaOpen) toggleBeta();
-            }
-        });
-
-        // --- 5. ЧАСТИЦЫ ---
+        // --- 5. ЧАСТИЦЫ (Улучшенный движок) ---
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
-        let mouse = { x: null, y: null, radius: 120 };
+        let mouse = { x: null, y: null, radius: 150 };
 
         window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
-        window.addEventListener('touchmove', (e) => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; });
+        window.addEventListener('touchmove', (e) => { 
+            mouse.x = e.touches[0].clientX; 
+            mouse.y = e.touches[0].clientY; 
+        }, { passive: true });
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('touchend', () => { mouse.x = null; mouse.y = null; });
 
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initParticles(); });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight; 
+            initParticles();
+        }
+        window.addEventListener('resize', resizeCanvas);
 
         class Particle {
             constructor(x, y, directionX, directionY, size, color) {
-                this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color;
+                this.x = x; this.y = y; 
+                this.directionX = directionX; this.directionY = directionY; 
+                this.size = size; this.color = color;
             }
             draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.shadowBlur = 15; ctx.shadowColor = this.color;
-                ctx.fillStyle = this.color; ctx.fill(); ctx.shadowBlur = 0;
+                ctx.beginPath(); 
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.shadowBlur = 10; 
+                ctx.shadowColor = this.color;
+                ctx.fillStyle = this.color; 
+                ctx.fill(); 
+                ctx.shadowBlur = 0;
             }
             update() {
                 if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
                 if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < mouse.radius + this.size) {
-                    const forceDirectionX = dx / distance; const forceDirectionY = dy / distance; const force = (mouse.radius - distance) / mouse.radius;
-                    this.x -= forceDirectionX * force * 5; this.y -= forceDirectionY * force * 5;
+                
+                // Взаимодействие с мышью
+                if (mouse.x && mouse.y) {
+                    let dx = mouse.x - this.x; 
+                    let dy = mouse.y - this.y; 
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius + this.size) {
+                        const forceDirectionX = dx / distance; 
+                        const forceDirectionY = dy / distance; 
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        this.x -= forceDirectionX * force * 8; // Сила отталкивания
+                        this.y -= forceDirectionY * force * 8;
+                    }
                 }
-                this.x += this.directionX; this.y += this.directionY; this.draw();
+                
+                this.x += this.directionX; 
+                this.y += this.directionY; 
+                this.draw();
             }
         }
 
         function initParticles() {
             particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 10000;
+            // Чуть больше частиц
+            let numberOfParticles = (canvas.height * canvas.width) / 9000; 
             const brandColor = getComputedStyle(document.body).getPropertyValue('--brand').trim();
             
             let r = 0, g = 121, b = 194;
@@ -839,11 +885,12 @@
             }
 
             for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2.5) + 1.5;
+                let size = (Math.random() * 2.5) + 1.5; // Размер чуть больше
                 let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
                 let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * 0.4) - 0.2; let directionY = (Math.random() * 0.4) - 0.2;
-                let color = `rgba(${r}, ${g}, ${b}, 0.6)`;
+                let directionX = (Math.random() * 0.8) - 0.4; 
+                let directionY = (Math.random() * 0.8) - 0.4;
+                let color = `rgba(${r}, ${g}, ${b}, 0.8)`; // Чуть ярче
                 particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
             }
         }
@@ -862,287 +909,98 @@
 
             for (let i = 0; i < particlesArray.length; i++) {
                 particlesArray[i].update();
+                
+                // Соединение линиями между частицами
                 for (let j = i; j < particlesArray.length; j++) {
-                    let distance = ((particlesArray[i].x - particlesArray[j].x) * (particlesArray[i].x - particlesArray[j].x))
-                                 + ((particlesArray[i].y - particlesArray[j].y) * (particlesArray[i].y - particlesArray[j].y));
-                    if (distance < (canvas.width / 8) * (canvas.height / 8)) {
+                    let distance = ((particlesArray[i].x - particlesArray[j].x) ** 2) + ((particlesArray[i].y - particlesArray[j].y) ** 2);
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
                         let opacityValue = 1 - (distance / 15000);
                         ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacityValue * 0.4})`;
                         ctx.lineWidth = 1;
-                        ctx.beginPath(); ctx.moveTo(particlesArray[i].x, particlesArray[i].y); ctx.lineTo(particlesArray[j].x, particlesArray[j].y); ctx.stroke();
+                        ctx.beginPath(); 
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y); 
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y); 
+                        ctx.stroke();
+                    }
+                }
+
+                // Соединение линиями с мышью
+                if (mouse.x && mouse.y) {
+                    let distanceToMouse = ((particlesArray[i].x - mouse.x) ** 2) + ((particlesArray[i].y - mouse.y) ** 2);
+                    if (distanceToMouse < (mouse.radius * 2) ** 2) {
+                        let opacityValue = 1 - (distanceToMouse / ((mouse.radius * 2) ** 2));
+                        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacityValue * 0.6})`;
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath(); 
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y); 
+                        ctx.lineTo(mouse.x, mouse.y); 
+                        ctx.stroke();
                     }
                 }
             }
         }
 
-        // --- 6. ШАБЛОН ЗВОНКОВ ---
-        function getBellsTemplate(dayName, num, course = '1') {
-            const isMonday = (dayName === 'Понедельник');
-            
-            if (course === '1') {
-                if (isMonday) {
-                    if (num === 0) return { s1: 9*60+20, e1: 10*60+5, s2: null, e2: null };
-                    if (num === 1) return { s1: 10*60+15, e1: 11*60, s2: 11*60+30, e2: 12*60+15 };
-                    if (num === 2) return { s1: 12*60+25, e1: 13*60+10, s2: 13*60+15, e2: 14*60 };
-                    if (num === 3) return { s1: 14*60+10, e1: 14*60+55, s2: 15*60, e2: 15*60+45 };
-                    if (num === 4) return { s1: 16*60+15, e1: 17*60, s2: 17*60+5, e2: 17*60+50 };
-                } else {
-                    if (num === 1) return { s1: 8*60+30, e1: 9*60+15, s2: 9*60+20, e2: 10*60+5 };
-                    if (num === 2) return { s1: 10*60+15, e1: 11*60, s2: 11*60+30, e2: 12*60+15 };
-                    if (num === 3) return { s1: 12*60+25, e1: 13*60+10, s2: 13*60+15, e2: 14*60 };
-                    if (num === 4) return { s1: 14*60+10, e1: 14*60+55, s2: 15*60, e2: 15*60+45 };
-                    if (num === 5) return { s1: 16*60+15, e1: 17*60, s2: 17*60+5, e2: 17*60+50 };
-                }
-            } else {
-                if (num === 1) return { s1: 8*60+30, e1: 9*60+15, s2: 9*60+20, e2: 10*60+5 };
-                if (num === 2) return { s1: 10*60+15, e1: 11*60, s2: 11*60+5, e2: 11*60+50 };
-                if (num === 3) return { s1: 12*60+25, e1: 13*60+10, s2: 13*60+15, e2: 14*60 };
-                if (num === 4) return { s1: 14*60+10, e1: 14*60+55, s2: 15*60, e2: 15*60+45 };
-                if (num === 5) return { s1: 15*60+55, e1: 16*60+40, s2: 16*60+45, e2: 17*60+30 };
-            }
-            return { s1: 0, e1: 0, s2: null, e2: null };
-        }
-
-        function getMainBellsSchedule(course) {
-            const today = new Date().getDay();
-            const daysArr = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
-            const dayName = (today === 0 || today === 6) ? "Понедельник" : daysArr[today];
-            
-            let schedule = [];
-            
-            if (course === '1') {
-                if (dayName === 'Понедельник') {
-                    schedule.push({ type: 'pair', num: 0, name: '0 пара', t1s: 560, t1e: 605 });
-                    schedule.push({ type: 'pair', num: 1, name: '1 пара', t1s: 615, t1e: 660, t2s: 690, t2e: 735 });
-                    schedule.push({ type: 'break', name: 'Обед', time: '11:00 – 11:30' });
-                    schedule.push({ type: 'pair', num: 2, name: '2 пара', t1s: 745, t1e: 790, t2s: 795, t2e: 840 });
-                    schedule.push({ type: 'pair', num: 3, name: '3 пара', t1s: 850, t1e: 895, t2s: 900, t2e: 945 });
-                    schedule.push({ type: 'break', name: 'Перерыв', time: '15:45 – 16:15' });
-                    schedule.push({ type: 'pair', num: 4, name: '4 пара', t1s: 975, t1e: 1020, t2s: 1025, t2e: 1070 });
-                } else {
-                    schedule.push({ type: 'pair', num: 1, name: '1 пара', t1s: 510, t1e: 555, t2s: 560, t2e: 605 });
-                    schedule.push({ type: 'pair', num: 2, name: '2 пара', t1s: 615, t1e: 660, t2s: 690, t2e: 735 });
-                    schedule.push({ type: 'break', name: 'Обед', time: '11:00 – 11:30' });
-                    schedule.push({ type: 'pair', num: 3, name: '3 пара', t1s: 745, t1e: 790, t2s: 795, t2e: 840 });
-                    schedule.push({ type: 'pair', num: 4, name: '4 пара', t1s: 850, t1e: 895, t2s: 900, t2e: 945 });
-                    schedule.push({ type: 'break', name: 'Перерыв', time: '15:45 – 16:15' });
-                    schedule.push({ type: 'pair', num: 5, name: '5 пара', t1s: 975, t1e: 1020, t2s: 1025, t2e: 1070 });
-                }
-            } else {
-                schedule.push({ type: 'pair', num: 1, name: '1 пара', t1s: 510, t1e: 555, t2s: 560, t2e: 605 });
-                schedule.push({ type: 'pair', num: 2, name: '2 пара', t1s: 615, t1e: 660, t2s: 665, t2e: 710 });
-                schedule.push({ type: 'break', name: 'Обед', time: '11:50 – 12:25' });
-                schedule.push({ type: 'pair', num: 3, name: '3 пара', t1s: 745, t1e: 790, t2s: 795, t2e: 840 });
-                schedule.push({ type: 'pair', num: 4, name: '4 пара', t1s: 850, t1e: 895, t2s: 900, t2e: 945 });
-                schedule.push({ type: 'pair', num: 5, name: '5 пара', t1s: 955, t1e: 1000, t2s: 1005, t2e: 1050 });
-            }
-            return schedule;
-        }
-
-        let currentCourse = '1';
-        function switchCourse(course) {
-            currentCourse = course;
-            const btn1 = document.getElementById('btn-c1');
-            const btn2 = document.getElementById('btn-c2');
-            
-            if (course === '1') {
-                btn1.style.backgroundColor = 'var(--brand)';
-                btn1.style.color = 'var(--brand-text)';
-                btn2.style.backgroundColor = 'transparent';
-                btn2.style.color = 'var(--text-muted)';
-            } else {
-                btn2.style.backgroundColor = 'var(--brand)';
-                btn2.style.color = 'var(--brand-text)';
-                btn1.style.backgroundColor = 'transparent';
-                btn1.style.color = 'var(--text-muted)';
-            }
-            renderBellsList();
-            updateLiveTimer(); 
-        }
-
-        function formatTime(mins) {
-            if (mins === null) return '';
-            return `${String(Math.floor(mins/60)).padStart(2,'0')}:${String(mins%60).padStart(2,'0')}`;
-        }
-
+        // --- 6. ЛОГИКА ЗВОНКОВ ---
         function renderBellsList() {
             const container = document.getElementById('bells-container');
-            const data = getMainBellsSchedule(currentCourse);
-            let html = '';
-
-            const now = new Date();
-            const currentMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
-
-            data.forEach((item, index) => {
-                if (item.type === 'pair') {
-                    const hasSecondPart = item.t2s !== null;
-                    
-                    let isPart1Active = (currentMinutes >= item.t1s && currentMinutes < item.t1e);
-                    let isPart2Active = (hasSecondPart && currentMinutes >= item.t2s && currentMinutes < item.t2e);
-                    
-                    let part1Class = isPart1Active ? 'text-brand font-bold scale-105' : 'text-muted font-medium';
-                    let part2Class = isPart2Active ? 'text-brand font-bold scale-105' : 'text-muted font-medium';
-                    
-                    let cardStyle = (isPart1Active || isPart2Active) ? 'border-color: var(--brand); background-color: var(--bg-hover);' : 'background-color: var(--bg-body); border-color: var(--border);';
-
-                    html += `
-                    <div class="flex flex-col p-3.5 rounded-xl border ${index === 0 ? 'mt-0' : 'mt-2'} transition-all duration-300" style="${cardStyle}">
-                        <div class="flex justify-between items-center mb-1.5">
-                            <div class="font-bold text-[15px] text-main flex items-center gap-2">
-                                <i class="fas fa-book text-[12px] opacity-50"></i> ${item.name}
-                            </div>
-                            <div class="text-[13px] font-bold text-main">${formatTime(item.t1s)} – ${formatTime(hasSecondPart ? item.t2e : item.t1e)}</div>
-                        </div>
-                        <div class="flex justify-between items-center text-[12px] mt-1 pl-5 transition-all ${part1Class}">
-                            <div class="flex items-center gap-1.5"><i class="fas fa-hourglass-start text-[10px]"></i> 1 часть</div>
-                            <div>${formatTime(item.t1s)} – ${formatTime(item.t1e)}</div>
-                        </div>
-                        ${hasSecondPart ? `
-                        <div class="flex justify-between items-center text-[12px] mt-1.5 pl-5 transition-all ${part2Class}">
-                            <div class="flex items-center gap-1.5"><i class="fas fa-hourglass-end text-[10px]"></i> 2 часть</div>
-                            <div>${formatTime(item.t2s)} – ${formatTime(item.t2e)}</div>
-                        </div>
-                        ` : ''}
-                    </div>`;
-                } else if (item.type === 'break') {
-                    let isBreakActive = false;
-                    const [startStr, endStr] = item.time.split(' – ');
-                    const [sh, sm] = startStr.split(':').map(Number);
-                    const [eh, em] = endStr.split(':').map(Number);
-                    if (currentMinutes >= sh*60+sm && currentMinutes < eh*60+em) isBreakActive = true;
-
-                    let breakStyle = isBreakActive ? 'border-color: var(--brand); background-color: var(--bg-hover);' : 'background-color: var(--bg-body); border-color: var(--border); opacity-70';
-
-                    html += `
-                    <div class="flex justify-between items-center p-3 my-2 rounded-xl border transition-all ${isBreakActive ? 'active-pair' : ''}" style="${breakStyle}">
-                        <div class="font-bold text-[13px] flex items-center gap-2 ${isBreakActive ? 'text-brand' : 'text-muted'}">
-                            <i class="fas fa-coffee"></i> ${item.name}
-                        </div>
-                        <div class="text-[12px] font-bold ${isBreakActive ? 'text-brand' : 'text-muted'}">${item.time}</div>
-                    </div>`;
-                }
-            });
-            container.innerHTML = html;
-        }
-
-        function getPairGenitive(num) {
-            if (num % 10 === 1 && num % 100 !== 11) return `${num} пары`;
-            if ([2, 3, 4].includes(num % 10) && ![12, 13, 14].includes(num % 100)) return `${num} пар`;
-            return `${num} пар`;
-        }
-
-        // --- 7. БЕТА РАСПИСАНИЕ РЕНДЕР ---
-        function renderBetaSchedule() {
-            const week = getBetaWeekNum();
-            const groupData = groupsData[currentBetaGroup];
-            const container = document.getElementById('beta-schedule-container');
-            const days = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница"];
-            
             const today = new Date().getDay();
-            const now = new Date();
-            const currentMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+            const isMonday = today === 1;
+            const bellsData = isMonday ? DATABASE.bells.monday : DATABASE.bells.otherDays;
 
             let html = '';
-
-            days.forEach((dayName, dayIndex) => {
-                const dayData = groupData && groupData[week] ? groupData[week][dayName] : null;
-                
-                // Если расписание пустое
-                if (!dayData || dayData.length === 0) {
+            bellsData.forEach((item) => {
+                if (item.isBreak) {
                     html += `
-                    <div class="glass-card rounded-2xl p-4 border border-[var(--border)] opacity-60">
-                        <h3 class="text-base font-bold text-main mb-2 flex items-center gap-2">${dayName}</h3>
-                        <p class="text-xs text-muted flex items-center gap-2"><i class="fas fa-ghost"></i> Нет пар</p>
+                    <div class="flex justify-between items-center py-1.5 px-3 my-1.5 rounded-lg font-bold text-[11px]" style="color: var(--brand); background-color: var(--bg-hover); border: 1px solid var(--border);">
+                        <span><i class="fas fa-coffee mr-1"></i> ${item.label}</span>
+                        <span>${item.start} – ${item.end}</span>
                     </div>`;
-                    return;
-                }
-
-                const isToday = (dayIndex + 1) === today;
-                const todayClass = isToday ? 'border-2 border-brand bg-brand/10 shadow-[0_0_20px_var(--glow)] z-10' : 'border border-[var(--border)] opacity-80 hover:opacity-100';
-                
-                html += `
-                <div class="glass-card rounded-2xl p-4 ${todayClass} transition-all duration-300 relative" id="beta-day-${dayIndex}">
-                    ${isToday ? '<div class="absolute top-0 right-0 bg-brand text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl rounded-tr-xl uppercase shadow-lg">Сегодня</div>' : ''}
-                    <div class="flex justify-between items-center mb-3 mt-1">
-                        <h3 class="text-base font-bold text-main flex items-center gap-2">
-                            ${dayName}
-                        </h3>
-                    </div>
-                    <div class="space-y-3">`;
-
-                // Перебираем возможные пары от 0 до 5
-                for (let num = 0; num <= 5; num++) {
-                    const item = dayData.find(x => x.num === num);
-                    if (!item) continue;
-
-                    const times = getBellsTemplate(dayName, num, '1');
-                    const timeStr = times.s2 ? `${formatTime(times.s1)}-${formatTime(times.e1)} / ${formatTime(times.s2)}-${formatTime(times.e2)}` : `${formatTime(times.s1)}-${formatTime(times.e1)}`;
-                    
-                    // Подсветка текущей пары
-                    let isActive = false;
-                    if (isToday && times.s1 !== 0) {
-                        if (currentMinutes >= times.s1 && currentMinutes < times.e1) isActive = true;
-                        if (times.s2 && currentMinutes >= times.s2 && currentMinutes < times.e2) isActive = true;
-                    }
-
-                    const activeStyle = isActive ? 'bg-brand/10 border-brand scale-[1.01] shadow-[0_0_10px_var(--glow)]' : 'border-transparent';
-
-                    html += `
-                    <div class="flex gap-3 p-2 rounded-xl border transition-all ${activeStyle}">
-                        <div class="flex flex-col items-center pt-1 w-6 shrink-0">
-                            <span class="text-[11px] font-bold ${isActive ? 'text-brand' : 'text-muted'}">${item.num}</span>
-                        </div>
-                        <div class="flex-1 border-b border-dashed border-[var(--border)] pb-2">
-                            <div class="flex justify-between items-start">
-                                <div class="font-bold ${isActive ? 'text-brand' : 'text-main'} text-[14px]">${item.subj}</div>
-                                <div class="text-[11px] font-semibold ${isActive ? 'text-brand' : 'text-muted'} whitespace-nowrap ml-2">${timeStr}</div>
+                } else {
+                    // Внутренний таймлайн пары
+                    let innerTimeline = '';
+                    if (item.h2_start) {
+                        innerTimeline = `
+                        <div class="mt-2 pt-2 border-t border-dashed border-[var(--border)] flex flex-col gap-1 text-[10px] text-muted">
+                            <div class="flex justify-between items-center">
+                                <span>1 часть:</span>
+                                <span class="font-bold text-main">${item.h1_start} – ${item.h1_end}</span>
                             </div>
-                            <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-[11px] ${isActive ? 'text-brand' : 'text-muted'}">
-                                ${item.room ? `<span class="flex items-center gap-1"><i class="fas fa-door-open opacity-70"></i> ${item.room}</span>` : ''}
-                                ${item.teacher ? `<span class="flex items-center gap-1"><i class="fas fa-user-tie opacity-70"></i> ${item.teacher}</span>` : ''}
+                            <div class="flex justify-between items-center text-brand/70">
+                                <span><i class="fas fa-coffee text-[8px] mr-1"></i> Перемена:</span>
+                                <span>${item.h1_end} – ${item.h2_start}</span>
                             </div>
-                        </div>
-                    </div>`;
-                    
-                    // Вставляем обед визуально после 1-й половины 2-й пары (если это 2-я пара по счету, но в шаблоне это num===2)
-                    if (num === 2 && times.s2) {
-                         html += `
-                        <div class="flex gap-3 opacity-70">
-                            <div class="flex flex-col items-center pt-1 w-6 shrink-0">
-                                <span class="text-[11px] font-bold text-muted"><i class="fas fa-coffee"></i></span>
+                            <div class="flex justify-between items-center">
+                                <span>2 часть:</span>
+                                <span class="font-bold text-main">${item.h2_start} – ${item.h2_end}</span>
                             </div>
-                            <div class="flex-1 pb-2">
-                                <div class="flex justify-between items-start">
-                                    <div class="font-bold text-main text-[14px] text-brand">Обед</div>
-                                    <div class="text-[11px] font-semibold text-muted whitespace-nowrap ml-2">11:00 - 11:30</div>
-                                </div>
+                        </div>`;
+                    } else {
+                        innerTimeline = `
+                        <div class="mt-2 pt-2 border-t border-dashed border-[var(--border)] flex flex-col gap-1 text-[10px] text-muted">
+                            <div class="flex justify-between items-center">
+                                <span>Время:</span>
+                                <span class="font-bold text-main">${item.start} – ${item.end}</span>
                             </div>
                         </div>`;
                     }
-                    // Вставляем перерыв после 4-й пары
-                    if (num === 4 && times.s2) {
-                        html += `
-                       <div class="flex gap-3 opacity-70">
-                           <div class="flex flex-col items-center pt-1 w-6 shrink-0">
-                               <span class="text-[11px] font-bold text-muted"><i class="fas fa-walking"></i></span>
-                           </div>
-                           <div class="flex-1 pb-2">
-                               <div class="flex justify-between items-start">
-                                   <div class="font-bold text-main text-[14px] text-brand">Перерыв</div>
-                                   <div class="text-[11px] font-semibold text-muted whitespace-nowrap ml-2">15:45 - 16:15</div>
-                               </div>
-                           </div>
-                       </div>`;
-                   }
+
+                    html += `
+                    <div class="flex flex-col p-3 rounded-xl border mb-2" style="background-color: var(--bg-body); border-color: var(--border);">
+                        <div class="flex justify-between items-center">
+                            <div class="font-bold text-[14px] text-main flex items-center gap-1.5">
+                                <i class="fas fa-book text-[12px] opacity-50"></i> 
+                                ${item.num === 0 ? item.label : item.num + ' пара'}
+                            </div>
+                            <div class="text-[12px] font-bold text-main">${item.start} – ${item.end}</div>
+                        </div>
+                        ${innerTimeline}
+                    </div>`;
                 }
-
-                html += `</div></div>`;
             });
-
             container.innerHTML = html;
         }
 
-        // --- 8. ТАЙМЕРЫ ---
+        // --- 7. ТАЙМЕР И ДЗЕН ---
         function updateLiveTimer() {
             const now = new Date();
             const day = now.getDay(); 
@@ -1152,324 +1010,383 @@
             const countdownEl = document.getElementById('timer-countdown');
             const iconEl = document.getElementById('timer-icon');
             const progressEl = document.getElementById('timer-progress');
-
-            const zenLabel = document.getElementById('zen-label');
+            
+            const zenTitle = document.getElementById('zen-title');
+            const zenSubtitle = document.getElementById('zen-subtitle');
             const zenTime = document.getElementById('zen-time');
-            const zenSubtext = document.getElementById('zen-subtext');
             const zenProgress = document.getElementById('zen-progress');
-            const zenBar = document.getElementById('zen-bar');
+            const zenAdvice = document.getElementById('zen-advice');
 
             if (day === 0 || day === 6) {
                 labelEl.innerText = 'Выходной';
-                titleEl.innerText = 'Отдыхай 🌴';
+                titleEl.innerText = 'Отдыхай';
                 countdownEl.innerText = 'Занятий нет';
                 iconEl.className = 'fas fa-cocktail text-lg';
                 progressEl.style.strokeDashoffset = 263.89;
 
-                zenLabel.innerText = 'Выходной';
-                zenTime.innerText = '00:00';
-                zenSubtext.innerText = 'спи, отдыхай';
-                zenProgress.style.strokeDashoffset = 282.74;
-                zenBar.style.width = '0%';
+                if (isZen) {
+                    zenTitle.innerText = 'Выходной';
+                    zenSubtitle.innerText = 'Никаких пар';
+                    zenTime.innerText = 'OFF';
+                    zenProgress.style.strokeDashoffset = 753.98;
+                    zenAdvice.innerText = 'Наслаждайся заслуженным отдыхом.';
+                }
                 return;
             }
 
             const currentMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
-            const data = getMainBellsSchedule(currentCourse);
+            const isMonday = day === 1;
+            const data = isMonday ? DATABASE.bells.monday : DATABASE.bells.otherDays;
             
+            const timeline = [];
+            data.forEach(x => {
+                timeline.push({ ...x, s1: timeToMin(x.start), e1: timeToMin(x.end) });
+            });
+            timeline.sort((a, b) => a.s1 - b.s1);
+
             let currentEvent = null;
             let nextEvent = null;
 
-            for (let i = 0; i < data.length; i++) {
-                const item = data[i];
-                if (item.type === 'pair') {
-                    if (currentMinutes >= item.t1s && currentMinutes < item.t1e) {
-                        currentEvent = { type: '1 часть', subject: item.name, start: item.t1s, end: item.t1e }; break;
-                    }
-                    if (item.t2s && currentMinutes >= item.t2s && currentMinutes < item.t2e) {
-                        currentEvent = { type: '2 часть', subject: item.name, start: item.t2s, end: item.t2e }; break;
-                    }
-                } else if (item.type === 'break') {
-                    const [startStr, endStr] = item.time.split(' – ');
-                    const [sh, sm] = startStr.split(':').map(Number);
-                    const [eh, em] = endStr.split(':').map(Number);
-                    if (currentMinutes >= sh*60+sm && currentMinutes < eh*60+em) {
-                        currentEvent = { type: 'Перерыв', subject: item.name, start: sh*60+sm, end: eh*60+em }; break;
+            for (let i = 0; i < timeline.length; i++) {
+                if (currentMinutes >= timeline[i].s1 && currentMinutes < timeline[i].e1) {
+                    currentEvent = timeline[i]; break;
+                }
+            }
+
+            if (!currentEvent) {
+                for (let i = 0; i < timeline.length; i++) {
+                    if (timeline[i].s1 > currentMinutes) { 
+                        nextEvent = timeline[i]; break; 
                     }
                 }
             }
 
             if (currentEvent) {
-                const total = currentEvent.end - currentEvent.start;
-                const passed = currentMinutes - currentEvent.start;
-                const left = currentEvent.end - currentMinutes;
+                const total = currentEvent.e1 - currentEvent.s1;
+                const passed = currentMinutes - currentEvent.s1;
+                const left = currentEvent.e1 - currentMinutes;
                 
                 let min = Math.floor(left);
                 let sec = Math.floor((left - min) * 60);
                 let hours = Math.floor(min / 60);
                 min = min % 60;
 
-                labelEl.innerText = currentEvent.type;
-                titleEl.innerText = currentEvent.subject;
-                
                 let timeStr = hours > 0 ? `${hours} ч ${min} мин` : `${min}:${String(sec).padStart(2, '0')}`;
-                countdownEl.innerText = `До конца: ${timeStr}`;
-                iconEl.className = currentEvent.type === 'Перерыв' ? 'fas fa-mug-hot text-lg' : 'fas fa-book-open text-lg';
-                
-                progressEl.style.strokeDashoffset = 263.89 * (passed / total);
 
-                zenLabel.innerText = currentEvent.type;
-                zenTime.innerText = hours > 0 ? `${hours}:${String(min).padStart(2, '0')}` : `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
-                zenSubtext.innerText = hours > 0 ? 'часов осталось' : 'минут осталось';
-                
-                const percentLeft = 100 - ((passed / total) * 100);
-                zenProgress.style.strokeDashoffset = 282.74 * (passed / total);
-                zenBar.style.width = `${percentLeft}%`;
-
-            } else {
-                for (let i = 0; i < data.length; i++) {
-                    const item = data[i];
-                    if (item.type === 'pair') {
-                        if (item.t1s > currentMinutes) { nextEvent = { subject: item.name, start: item.t1s, num: item.num }; break; }
-                    } else if (item.type === 'break') {
-                        const [startStr] = item.time.split(' – ');
-                        const [sh, sm] = startStr.split(':').map(Number);
-                        if (sh*60+sm > currentMinutes) { nextEvent = { subject: item.name, start: sh*60+sm, num: -1 }; break; }
+                if (currentEvent.isBreak) {
+                    labelEl.innerText = 'Перерыв';
+                    titleEl.innerText = currentEvent.label;
+                    iconEl.className = 'fas fa-coffee text-lg';
+                    countdownEl.innerText = `До конца: ${timeStr}`;
+                    
+                    if (isZen) {
+                        zenTitle.innerText = currentEvent.label;
+                        zenSubtitle.innerText = 'Время отдохнуть';
+                        zenTime.innerText = `${min}:${String(sec).padStart(2, '0')}`;
+                        zenProgress.style.strokeDashoffset = 753.98 * (passed / total);
+                        zenAdvice.innerText = 'Разомнись, попей воды и не забудь про следующую пару.';
+                    }
+                } else {
+                    labelEl.innerText = 'Идет';
+                    titleEl.innerText = `${currentEvent.num ? currentEvent.num + ' пара' : currentEvent.label}`;
+                    iconEl.className = 'fas fa-book-open text-lg';
+                    countdownEl.innerText = `До конца: ${timeStr}`;
+                    
+                    if (isZen) {
+                        zenTitle.innerText = `Идет ${currentEvent.num} пара`;
+                        zenSubtitle.innerText = 'Сфокусируйся на учебе';
+                        zenTime.innerText = `${min}:${String(sec).padStart(2, '0')}`;
+                        zenProgress.style.strokeDashoffset = 753.98 * (passed / total);
+                        zenAdvice.innerText = 'Не отвлекайся на телефон. Ты справишься!';
                     }
                 }
+                progressEl.style.strokeDashoffset = 263.89 * (passed / total);
 
-                if (nextEvent) {
-                    const left = nextEvent.start - currentMinutes;
-                    let min = Math.floor(left);
-                    let sec = Math.floor((left - min) * 60);
-                    let hours = Math.floor(min / 60);
-                    min = min % 60;
-                    
-                    labelEl.innerText = 'До начала';
-                    titleEl.innerText = nextEvent.num === -1 ? nextEvent.subject : getPairGenitive(nextEvent.num);
-                    
-                    let timeStr = hours > 0 ? `${hours} ч ${min} мин` : `${min} мин ${String(sec).padStart(2, '0')} сек`;
-                    countdownEl.innerText = timeStr;
-                    iconEl.className = 'fas fa-hourglass-start text-lg';
-                    progressEl.style.strokeDashoffset = 0; 
-
-                    zenLabel.innerText = 'До начала';
-                    zenTime.innerText = hours > 0 ? `${hours}:${String(min).padStart(2, '0')}` : `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
-                    zenSubtext.innerText = hours > 0 ? 'часов осталось' : 'минут осталось';
-                    zenProgress.style.strokeDashoffset = 0;
-                    zenBar.style.width = '100%';
-                } else {
-                    labelEl.innerText = 'Статус';
-                    titleEl.innerText = 'Занятия окончены 🎉';
-                    countdownEl.innerText = 'Отдыхай!';
-                    iconEl.className = 'fas fa-check-circle text-lg text-green-500';
-                    progressEl.style.strokeDashoffset = 0;
-
-                    zenLabel.innerText = 'Статус';
-                    zenTime.innerText = '00:00';
-                    zenSubtext.innerText = 'свобода';
-                    zenProgress.style.strokeDashoffset = 282.74;
-                    zenBar.style.width = '0%';
-                }
-            }
-        }
-
-        function updateBetaTimer() {
-            if (!isBetaOpen) return;
-
-            const now = new Date();
-            const day = now.getDay(); 
-            const week = getBetaWeekNum();
-            const groupData = groupsData[currentBetaGroup];
-            
-            const titleEl = document.getElementById('beta-timer-title');
-            const labelEl = document.getElementById('beta-timer-label');
-            const countdownEl = document.getElementById('beta-timer-countdown');
-            const iconEl = document.getElementById('beta-timer-icon');
-            const progressEl = document.getElementById('beta-timer-progress');
-
-            if (day === 0 || day === 6) {
-                labelEl.innerText = 'Выходной';
-                titleEl.innerText = 'Отдыхай 🌴';
-                countdownEl.innerText = 'Занятий нет';
-                iconEl.className = 'fas fa-cocktail text-sm';
-                progressEl.style.strokeDashoffset = 263.89;
-                return;
-            }
-
-            const currentMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
-            const daysArr = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница"];
-            const currentDayName = daysArr[day - 1];
-            
-            const todaySchedule = groupData && groupData[week] ? groupData[week][currentDayName] || [] : [];
-
-            if (todaySchedule.length === 0) {
-                labelEl.innerText = 'Статус';
-                titleEl.innerText = 'Расписание пустое';
-                countdownEl.innerText = 'Хорошего дня!';
-                iconEl.className = 'fas fa-ghost text-sm text-muted';
-                progressEl.style.strokeDashoffset = 263.89;
-                return;
-            }
-            
-            let currentEvent = null;
-            let nextEvent = null;
-
-            for (let i = 0; i < todaySchedule.length; i++) {
-                const item = todaySchedule[i];
-                const times = getBellsTemplate(currentDayName, item.num, '1');
-                
-                if (currentMinutes >= times.s1 && currentMinutes < times.e1) {
-                    currentEvent = { type: '1 часть', subject: item.subj, start: times.s1, end: times.e1 }; break;
-                }
-                if (times.s2 && currentMinutes >= times.e1 && currentMinutes < times.s2) {
-                    currentEvent = { type: 'Перерыв', subject: 'Обед', start: times.e1, end: times.s2 }; break;
-                }
-                if (times.s2 && currentMinutes >= times.s2 && currentMinutes < times.e2) {
-                    currentEvent = { type: '2 часть', subject: item.subj, start: times.s2, end: times.e2 }; break;
-                }
-            }
-
-            if (currentEvent) {
-                const total = currentEvent.end - currentEvent.start;
-                const passed = currentMinutes - currentEvent.start;
-                const left = currentEvent.end - currentMinutes;
-                
+            } else if (nextEvent) {
+                const left = nextEvent.s1 - currentMinutes;
                 let min = Math.floor(left);
                 let sec = Math.floor((left - min) * 60);
                 let hours = Math.floor(min / 60);
                 min = min % 60;
-
-                labelEl.innerText = currentEvent.type;
-                titleEl.innerText = currentEvent.subject;
                 
-                let timeStr = hours > 0 ? `${hours} ч ${min} мин` : `${min}:${String(sec).padStart(2, '0')}`;
-                countdownEl.innerText = `До конца: ${timeStr}`;
-                iconEl.className = currentEvent.type === 'Перерыв' ? 'fas fa-mug-hot text-sm' : 'fas fa-book-open text-sm';
+                let timeStr = hours > 0 ? `${hours} ч ${min} мин` : `${min} мин ${String(sec).padStart(2, '0')} сек`;
                 
-                progressEl.style.strokeDashoffset = 263.89 * (passed / total);
+                if (nextEvent.isBreak) {
+                    labelEl.innerText = 'Скоро перерыв';
+                    titleEl.innerText = nextEvent.label;
+                } else {
+                    labelEl.innerText = 'До начала';
+                    titleEl.innerText = `${nextEvent.num ? nextEvent.num + ' пары' : nextEvent.label}`;
+                }
+                iconEl.className = 'fas fa-hourglass-start text-lg';
+                countdownEl.innerText = timeStr;
+                progressEl.style.strokeDashoffset = 0;
 
-            } else {
-                for (let i = 0; i < todaySchedule.length; i++) {
-                    const item = todaySchedule[i];
-                    const times = getBellsTemplate(currentDayName, item.num, '1');
-                    if (times.s1 > currentMinutes) { nextEvent = { subject: item.subj, start: times.s1, num: item.num }; break; }
+                if (isZen) {
+                    zenTitle.innerText = nextEvent.isBreak ? 'Скоро перерыв' : 'Скоро пара';
+                    zenSubtitle.innerText = nextEvent.label;
+                    zenTime.innerText = `${min}:${String(sec).padStart(2, '0')}`;
+                    zenProgress.style.strokeDashoffset = 753.98;
+                    zenAdvice.innerText = 'Можешь немного отдохнуть, но не теряй бдительность.';
                 }
 
-                if (nextEvent) {
-                    const left = nextEvent.start - currentMinutes;
-                    let min = Math.floor(left);
-                    let sec = Math.floor((left - min) * 60);
-                    let hours = Math.floor(min / 60);
-                    min = min % 60;
-                    
-                    labelEl.innerText = 'До начала';
-                    titleEl.innerText = nextEvent.num === 0 ? nextEvent.subject : getPairGenitive(nextEvent.num);
-                    
-                    let timeStr = hours > 0 ? `${hours} ч ${min} мин` : `${min} мин ${String(sec).padStart(2, '0')} сек`;
-                    countdownEl.innerText = timeStr;
-                    iconEl.className = 'fas fa-hourglass-start text-sm';
-                    progressEl.style.strokeDashoffset = 0; 
-                } else {
-                    labelEl.innerText = 'Статус';
-                    titleEl.innerText = 'Занятия окончены 🎉';
-                    countdownEl.innerText = 'Отдыхай!';
-                    iconEl.className = 'fas fa-check-circle text-sm text-green-500';
-                    progressEl.style.strokeDashoffset = 0;
+            } else {
+                labelEl.innerText = 'Учеба кончилась';
+                titleEl.innerText = 'Отдыхай 🎉';
+                
+                const tomorrowFirstPair = timeline.find(t => !t.isBreak);
+                const minutesUntilMidnight = (24 * 60) - currentMinutes;
+                const totalLeft = minutesUntilMidnight + (tomorrowFirstPair ? tomorrowFirstPair.s1 : 0);
+                
+                let days = Math.floor(totalLeft / (24 * 60));
+                let rem = totalLeft % (24 * 60);
+                let hours = Math.floor(rem / 60);
+                let min = Math.floor(rem % 60);
+                
+                let timeStr = "";
+                if (days > 0) timeStr += `${days} д. `;
+                if (hours > 0) timeStr += `${hours} ч. `;
+                timeStr += `${min} мин.`;
+                
+                countdownEl.innerText = `До след. пары: ${timeStr}`;
+                iconEl.className = 'fas fa-moon text-lg';
+                progressEl.style.strokeDashoffset = 0;
+
+                if (isZen) {
+                    zenTitle.innerText = 'Учеба окончена';
+                    zenSubtitle.innerText = 'Свобода';
+                    zenTime.innerText = 'Zzz';
+                    zenProgress.style.strokeDashoffset = 753.98;
+                    zenAdvice.innerText = 'Отдыхай и набирайся сил. Завтра новый день.';
                 }
             }
         }
 
-        // --- 9. ПОГОДА ---
+        function timeToMin(t) {
+            if (!t) return 0;
+            const [h, m] = t.split(':').map(Number);
+            return h * 60 + m;
+        }
+
+        // --- 8. РЕНДЕР БЕТЫ ---
+        function renderBetaContent() {
+            const container = document.getElementById('beta-content');
+            const groupData = DATABASE.groups[currentBetaGroup];
+            
+            if (!groupData) return;
+
+            const weekKey = betaWeek === 1 ? 'week1' : 'week2';
+            const todayIndex = new Date().getDay() - 1; // 0 для Пн
+            let scrollTargetId = null;
+
+            let html = '';
+
+            daysArr.forEach((dayKey, idx) => {
+                const lessons = groupData[weekKey] ? groupData[weekKey][dayKey] || [] : [];
+                const isMonday = idx === 0;
+                const bells = isMonday ? DATABASE.bells.monday : DATABASE.bells.otherDays;
+                const isToday = idx === todayIndex;
+
+                let daySchedule = lessons.map(lesson => {
+                    const bell = bells.find(b => b.num === lesson.num);
+                    return { ...lesson, bell };
+                }).sort((a, b) => a.num - b.num);
+
+                if (isToday) scrollTargetId = `day-card-${idx}`;
+
+                let lessonsHtml = '';
+                if (daySchedule.length === 0) {
+                    lessonsHtml = `<p class="text-center text-muted text-xs py-2">Нет пар</p>`;
+                } else {
+                    daySchedule.forEach(item => {
+                        const bell = item.bell;
+                        const isActive = isToday && bell && new Date().getHours()*60 + new Date().getMinutes() >= timeToMin(bell.start) && new Date().getHours()*60 + new Date().getMinutes() < timeToMin(bell.end);
+
+                        let innerTimeline = '';
+                        if (bell) {
+                            innerTimeline = `
+                            <div class="mt-2 pt-2 border-t border-dashed border-[var(--border)] flex flex-col gap-1 text-[10px] text-muted">
+                                <div class="flex justify-between items-center">
+                                    <span>Начало:</span>
+                                    <span class="font-bold text-main">${bell.h1_start}</span>
+                                </div>
+                                ${bell.h2_start ? `
+                                <div class="flex justify-between items-center text-brand/70">
+                                    <span><i class="fas fa-coffee text-[8px] mr-1"></i> Перемена:</span>
+                                    <span>${bell.h1_end} - ${bell.h2_start}</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Конец пары:</span>
+                                    <span class="font-bold text-main">${bell.h2_end}</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                            `;
+                        }
+
+                        lessonsHtml += `
+                        <div class="flex gap-3 p-3 rounded-xl mb-2 border transition-all duration-300 ${isActive ? 'active-pair' : ''}" style="background-color: ${isActive ? 'var(--bg-hover)' : 'var(--bg-body)'}; border-color: ${isActive ? 'var(--brand)' : 'var(--border)'};">
+                            <div class="flex flex-col items-center pt-0.5 w-6 shrink-0">
+                                <span class="text-[14px] font-black ${isActive ? 'text-brand' : 'text-muted'}">${item.num}</span>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div class="font-bold text-main text-[14px]">${item.subj}</div>
+                                    ${isActive ? '<span class="text-[9px] font-bold bg-brand text-[var(--brand-text)] px-1.5 py-0.5 rounded uppercase ml-2 shrink-0 animate-pulse">Сейчас</span>' : ''}
+                                </div>
+                                <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-[11px] text-muted">
+                                    ${item.room ? `<span><i class="fas fa-door-open opacity-70 mr-1"></i>${item.room}</span>` : ''}
+                                    ${item.teacher ? `<span><i class="fas fa-user-tie opacity-70 mr-1"></i>${item.teacher}</span>` : ''}
+                                </div>
+                                ${innerTimeline}
+                            </div>
+                        </div>`;
+                    });
+                }
+
+                const cardBorder = isToday ? 'border-[var(--brand)] shadow-lg' : 'border-[var(--border)] opacity-80 hover:opacity-100';
+                const dayTitleColor = isToday ? 'text-brand' : 'text-main';
+
+                html += `
+                <div id="day-card-${idx}" class="glass-card rounded-3xl p-4 border transition-all duration-300 ${cardBorder} animate-fade" style="animation-delay: ${idx * 0.05}s;">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-base font-black ${dayTitleColor}">${fullDaysArr[idx]}</h3>
+                        ${isToday ? '<span class="text-[9px] font-bold bg-brand text-[var(--brand-text)] px-2 py-0.5 rounded-full uppercase">Сегодня</span>' : ''}
+                    </div>
+                    <div class="space-y-1">
+                        ${lessonsHtml}
+                    </div>
+                </div>`;
+            });
+
+            container.innerHTML = html;
+
+            if (scrollTargetId) {
+                setTimeout(() => {
+                    const el = document.getElementById(scrollTargetId);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
+        // --- 9. СПРАВОЧНИК ---
+        function toggleDirectory() {
+            const content = document.getElementById('directory-content');
+            const icon = document.getElementById('dir-icon');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+                renderConsultations();
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        function switchDirTab(tab) {
+            const libs = document.getElementById('dir-libs');
+            const cons = document.getElementById('dir-cons');
+            const btnLibs = document.getElementById('tab-libs');
+            const btnCons = document.getElementById('tab-cons');
+
+            if (tab === 'libs') {
+                libs.classList.remove('hidden'); cons.classList.add('hidden');
+                btnLibs.className = 'flex-1 py-2 text-xs font-bold rounded-lg transition-all bg-[var(--brand)] text-[var(--brand-text)] shadow-sm';
+                btnCons.className = 'flex-1 py-2 text-xs font-bold rounded-lg transition-all text-muted hover:text-main';
+            } else {
+                libs.classList.add('hidden'); cons.classList.remove('hidden');
+                btnCons.className = 'flex-1 py-2 text-xs font-bold rounded-lg transition-all bg-[var(--brand)] text-[var(--brand-text)] shadow-sm';
+                btnLibs.className = 'flex-1 py-2 text-xs font-bold rounded-lg transition-all text-muted hover:text-main';
+            }
+        }
+
+        function renderConsultations() {
+            const container = document.getElementById('dir-cons');
+            if (DATABASE.consultations.length === 0) {
+                container.innerHTML = `<p class="text-xs text-muted text-center py-2">Нет консультаций</p>`;
+                return;
+            }
+            let html = '';
+            DATABASE.consultations.forEach(c => {
+                html += `
+                <div class="p-2 border rounded-lg bg-[var(--bg-body)] border-[var(--border)]">
+                    <p class="text-sm font-bold text-main">${c.day} - ${c.subject}</p>
+                    <p class="text-xs text-muted">${c.teacher} • каб. ${c.room} • после ${c.after} пары</p>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // --- 10. ЗАМЕТКИ ---
+        let isNotesOpen = false;
+        const notesArea = document.getElementById('notes-area');
+        
+        const savedNotes = getStorage('user_notes') || '';
+        notesArea.value = savedNotes;
+
+        function toggleNotes() {
+            isNotesOpen = !isNotesOpen;
+            const modal = document.getElementById('notes-modal');
+            if (isNotesOpen) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => notesArea.focus(), 300);
+            } else {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function saveAndCloseNotes() {
+            setStorage('user_notes', notesArea.value);
+            const btn = document.querySelector('#notes-modal button[onclick="saveAndCloseNotes()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Сохранено!';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                toggleNotes();
+            }, 500);
+        }
+
+        // --- 11. ПОГОДА ---
         async function fetchWeather() {
-            const source = document.getElementById('weather-source').value;
-            const descEl = document.getElementById('weather-desc');
-            const iconEl = document.getElementById('weather-icon');
-            const tempEl = document.getElementById('weather-temp');
-            const windEl = document.getElementById('weather-wind');
-            const adviceEl = document.getElementById('weather-advice');
-
-            descEl.innerText = "Загрузка...";
-            iconEl.className = "fas fa-spinner fa-spin text-lg";
-
             try {
-                if (source === 'open-meteo') {
-                    const targetUrl = `https://api.open-meteo.com/v1/forecast?latitude=48.7194&longitude=44.5018&current_weather=true`;
-                    const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`);
-                    if (!res.ok) throw new Error('Network error');
-                    
-                    const data = await res.json();
-                    const weather = data.current_weather;
-                    
-                    const temp = Math.round(weather.temperature);
-                    const wind = Math.round(weather.windspeed / 3.6);
-                    const code = weather.weathercode;
-                    
-                    let desc = "Ясно", icon = "fa-sun";
-                    if (code > 0 && code <= 3) { desc = "Облачно"; icon = "fa-cloud"; }
-                    else if (code >= 45 && code <= 48) { desc = "Туман"; icon = "fa-smog"; }
-                    else if (code >= 51 && code <= 67) { desc = "Дождь"; icon = "fa-cloud-rain"; }
-                    else if (code >= 71 && code <= 77) { desc = "Снег"; icon = "fa-snowflake"; }
-                    else if (code >= 95) { desc = "Гроза"; icon = "fa-bolt"; }
+                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=48.7194&longitude=44.5018&current_weather=true`);
+                if (!res.ok) throw new Error('Network error');
+                const data = await res.json();
+                const weather = data.current_weather;
+                
+                const temp = Math.round(weather.temperature);
+                const wind = Math.round(weather.windspeed / 3.6);
+                const code = weather.weathercode;
+                
+                let desc = "Ясно", icon = "fa-sun";
+                if (code > 0 && code <= 3) { desc = "Облачно"; icon = "fa-cloud"; }
+                else if (code >= 45 && code <= 48) { desc = "Туман"; icon = "fa-smog"; }
+                else if (code >= 51 && code <= 67) { desc = "Дождь"; icon = "fa-cloud-rain"; }
+                else if (code >= 71 && code <= 77) { desc = "Снег"; icon = "fa-snowflake"; }
+                else if (code >= 95) { desc = "Гроза"; icon = "fa-bolt"; }
 
-                    tempEl.innerText = `${temp > 0 ? '+' : ''}${temp}°`;
-                    iconEl.className = `fas ${icon} text-lg`;
-                    descEl.innerText = desc;
-                    windEl.innerText = `Ветер: ${wind} м/с`;
-                    
-                    generateAdvice(temp, wind, adviceEl);
+                document.getElementById('weather-temp').innerText = `${temp > 0 ? '+' : ''}${temp}°`;
+                document.getElementById('weather-icon').className = `fas ${icon} text-lg`;
+                document.getElementById('weather-desc').innerText = desc;
+                document.getElementById('weather-wind').innerText = `Ветер: ${wind} м/с`;
 
-                } else if (source === 'wttr') {
-                    const res = await fetch(`https://wttr.in/Volgograd?format=j1`);
-                    if (!res.ok) throw new Error('Network error');
-                    
-                    const data = await res.json();
-                    const current = data.current_condition[0];
-                    
-                    const temp = Math.round(current.temp_C);
-                    const wind = Math.round(current.windspeedKmph / 3.6);
-                    const descStr = current.weatherDesc[0].value.toLowerCase();
+                let advice = "";
+                if (temp < 0) advice = "Надень пуховик, шапку и перчатки. На улице мороз!";
+                else if (temp < 10) advice = "Прохладно. Лучше надеть куртку и что-то на голову.";
+                else if (temp < 18) advice = "Свежо. Возьми ветровку или легкую куртку.";
+                else if (temp > 25) advice = "Жарко! Выбирай легкую одежду и пей больше воды.";
+                else advice = "Отличная погода для прогулки!";
+                
+                if (wind > 10) advice += " Очень ветрено.";
+                document.getElementById('weather-advice').innerText = advice;
 
-                    let desc = "Ясно", icon = "fa-sun";
-                    if (descStr.includes("cloud") || descStr.includes("overcast")) { desc = "Облачно"; icon = "fa-cloud"; }
-                    else if (descStr.includes("rain") || descStr.includes("drizzle")) { desc = "Дождь"; icon = "fa-cloud-rain"; }
-                    else if (descStr.includes("snow")) { desc = "Снег"; icon = "fa-snowflake"; }
-                    else if (descStr.includes("thunder")) { desc = "Гроза"; icon = "fa-bolt"; }
-                    else if (descStr.includes("mist") || descStr.includes("fog")) { desc = "Туман"; icon = "fa-smog"; }
-
-                    tempEl.innerText = `${temp > 0 ? '+' : ''}${temp}°`;
-                    iconEl.className = `fas ${icon} text-lg`;
-                    descEl.innerText = desc;
-                    windEl.innerText = `Ветер: ${wind} м/с`;
-                    
-                    generateAdvice(temp, wind, adviceEl);
-                }
             } catch (e) {
-                descEl.innerText = "Нет данных";
-                iconEl.className = "fas fa-wifi text-slate-500 text-lg";
-                adviceEl.innerText = "Проверь соединение";
+                document.getElementById('weather-desc').innerText = "Нет данных";
+                document.getElementById('weather-icon').className = "fas fa-wifi text-slate-500 text-lg";
+                document.getElementById('weather-advice').innerText = "Проверь соединение";
             }
-        }
-
-        function generateAdvice(temp, wind, el) {
-            let advice = "";
-            const advices = [
-                "Оденься легко, на улице тепло.", "Возьми ветровку, может продуть.",
-                "Надень куртку, прохладно.", "Утеплися, сегодня холодно!",
-                "Возьми зонт, возможен дождь.", "Надень шапку и шарф.",
-                "Сегодня отличная погода для прогулки!", "Лучше надеть что-то непромокаемое.",
-                "Солнечно, не забудь очки.", "Ветрено, выбери куртку поплотнее.",
-                "Тепло, но вечером похолодает.", "Оденься по погоде, но не кутайся."
-            ];
-
-            if (temp < 0) advice = "Надень пуховик, шапку и перчатки. На улице мороз!";
-            else if (temp < 10) advice = "Прохладно. Лучше надеть куртку и что-то на голову.";
-            else if (temp < 18) advice = "Свежо. Возьми ветровку или легкую куртку.";
-            else if (temp > 25) advice = "Жарко! Выбирай легкую одежду и пей больше воды.";
-            else advice = advices[Math.floor(Math.random() * advices.length)];
-
-            if (wind > 10) advice += " Очень ветрено.";
-            el.innerText = advice;
         }
 
         function updateDate() {
@@ -1477,12 +1394,10 @@
             document.getElementById('current-date').innerText = today.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' });
         }
 
-        // --- 10. ПАСХАЛКА ---
+        // --- 12. ПАСХАЛКА ---
         let clickCount = 0;
         let clickTimer;
-        const logoEl = document.getElementById('logo-trigger');
-        
-        logoEl.addEventListener('click', () => {
+        document.getElementById('logo-trigger').addEventListener('click', () => {
             clickCount++;
             clearTimeout(clickTimer);
             clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
@@ -1495,12 +1410,16 @@
             }
         });
 
-        // --- 11. ИНИЦИАЛИЗАЦИЯ ---
-        initParticles(); animateParticles(); updateDate(); updateWeekUI(); fetchWeather();
-        switchCourse('1'); // Инициализация основного расписания звонков
+        // --- 13. ИНИЦИАЛИЗАЦИЯ ---
+        resizeCanvas(); 
+        animateParticles(); 
+        updateDate(); 
+        updateWeekUI(); 
+        renderBellsList(); 
+        fetchWeather();
+        
         setInterval(() => {
             updateLiveTimer();
-            if (isBetaOpen) updateBetaTimer();
         }, 1000);
     </script>
 </body>

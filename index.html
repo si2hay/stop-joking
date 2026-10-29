@@ -208,14 +208,33 @@
                 </button>
             </div>
 
-            <!-- Переключатель недели -->
-            <div class="glass-card rounded-2xl p-2 mb-4 flex items-center justify-between border" style="border-color: var(--border);">
-                <button onclick="setBetaWeek('prev')" class="w-10 h-10 rounded-xl bg-slate-500/10 hover:bg-slate-500/20 flex items-center justify-center text-main"><i class="fas fa-chevron-left"></i></button>
-                <div class="text-center">
-                    <p class="text-[10px] uppercase font-bold text-muted">26 АТП-2Бо</p>
-                    <p class="font-bold text-main text-lg" id="beta-week-label">Текущая неделя (1)</p>
+            <!-- Переключатель недели и группы -->
+            <div class="relative z-20 mb-4">
+                <div class="glass-card rounded-2xl p-2 flex items-center justify-between border" style="border-color: var(--border);">
+                    <button onclick="setBetaWeek('prev')" class="w-10 h-10 rounded-xl bg-slate-500/10 hover:bg-slate-500/20 flex items-center justify-center text-main transition-colors active:scale-95"><i class="fas fa-chevron-left"></i></button>
+                    
+                    <button id="beta-group-toggle" onclick="toggleBetaGroupMenu(event)" class="flex-1 py-1 px-2 flex flex-col items-center justify-center rounded-xl hover:bg-slate-500/10 transition-colors">
+                        <div class="flex items-center gap-1.5">
+                            <span class="font-bold text-main text-[15px]" id="beta-group-label">26 АТП-2Бо</span>
+                            <i class="fas fa-chevron-down text-[10px] text-muted transition-transform duration-300" id="beta-group-arrow"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-brand" id="beta-week-label">Текущая (1)</span>
+                    </button>
+
+                    <button onclick="setBetaWeek('next')" class="w-10 h-10 rounded-xl bg-slate-500/10 hover:bg-slate-500/20 flex items-center justify-center text-main transition-colors active:scale-95"><i class="fas fa-chevron-right"></i></button>
                 </div>
-                <button onclick="setBetaWeek('next')" class="w-10 h-10 rounded-xl bg-slate-500/10 hover:bg-slate-500/20 flex items-center justify-center text-main"><i class="fas fa-chevron-right"></i></button>
+
+                <!-- Меню выбора группы -->
+                <div id="beta-group-menu" class="absolute left-0 right-0 top-[100%] mt-1 bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl shadow-2xl p-2 hidden z-50 menu-animate origin-top">
+                    <button onclick="selectBetaGroup('26 АТП-2Бо')" class="w-full text-left p-3 rounded-xl hover:bg-[var(--bg-hover)] transition-colors flex items-center justify-between">
+                        <span class="font-bold text-main text-sm">26 АТП-2Бо</span>
+                        <i class="fas fa-check text-brand text-xs" id="check-2bo"></i>
+                    </button>
+                    <button onclick="selectBetaGroup('26 АТП-3Бо')" class="w-full text-left p-3 rounded-xl hover:bg-[var(--bg-hover)] transition-colors flex items-center justify-between">
+                        <span class="font-bold text-muted text-sm">26 АТП-3Бо</span>
+                        <i class="fas fa-check text-brand text-xs hidden" id="check-3bo"></i>
+                    </button>
+                </div>
             </div>
 
             <!-- Таймер беты -->
@@ -455,75 +474,83 @@
 
     <script>
         // ==========================================
-        // БАЗА ДАННЫХ РАСПИСАНИЯ (БЕТА) - 26 АТП-2Бо
+        // БАЗА ДАННЫХ РАСПИСАНИЯ (БЕТА) - 26 АТП-2Бо и 3Бо
         // ==========================================
-        const betaData = {
-            group: "26 АТП-2Бо",
-            1: { // Неделя 1
-                "Понедельник": [
-                    { num: 0, subj: "Разговоры о важном", room: "2-110", teacher: "" },
-                    { num: 1, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
-                    { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
-                    { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                    { num: 4, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." }
-                ],
-                "Вторник": [
-                    { num: 1, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                    { num: 2, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
-                    { num: 3, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
-                    { num: 4, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." }
-                ],
-                "Среда": [
-                    { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
-                    { num: 2, subj: "Рос.-моя ист", room: "2-312", teacher: "Маняев А.Г." },
-                    { num: 3, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." }
-                ],
-                "Четверг": [
-                    { num: 2, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
-                    { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                    { num: 4, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
-                    { num: 5, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." }
-                ],
-                "Пятница": [
-                    { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
-                    { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                    { num: 3, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
-                    { num: 4, subj: "Кл. час", room: "", teacher: "" }
-                ]
+        const groupsData = {
+            "26 АТП-2Бо": {
+                1: { // Неделя 1
+                    "Понедельник": [
+                        { num: 0, subj: "Разговоры о важном", room: "2-110", teacher: "" },
+                        { num: 1, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                        { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                        { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                        { num: 4, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." }
+                    ],
+                    "Вторник": [
+                        { num: 1, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                        { num: 2, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
+                        { num: 3, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                        { num: 4, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." }
+                    ],
+                    "Среда": [
+                        { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                        { num: 2, subj: "Рос.-моя ист", room: "2-312", teacher: "Маняев А.Г." },
+                        { num: 3, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." }
+                    ],
+                    "Четверг": [
+                        { num: 2, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                        { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                        { num: 4, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                        { num: 5, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." }
+                    ],
+                    "Пятница": [
+                        { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                        { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                        { num: 3, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                        { num: 4, subj: "Кл. час", room: "", teacher: "" }
+                    ]
+                },
+                2: { // Неделя 2
+                    "Понедельник": [
+                        { num: 0, subj: "Разговоры о важном", room: "2-110", teacher: "" },
+                        { num: 1, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                        { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                        { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                        { num: 4, subj: "Информатика", room: "212 / 2-204", teacher: "1 п/г: Ушакова Е.П / 2 п/г: Резникова О.С." }
+                    ],
+                    "Вторник": [
+                        { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                        { num: 2, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                        { num: 3, subj: "Рос.-моя ист", room: "2-312", teacher: "Маняев А.Г." },
+                        { num: 4, subj: "Информатика", room: "212", teacher: "Ушакова Е.П." }
+                    ],
+                    "Среда": [
+                        { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                        { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
+                        { num: 3, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
+                        { num: 4, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." }
+                    ],
+                    "Четверг": [
+                        { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
+                        { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                        { num: 4, subj: "Информатика", room: "212 / 2-204", teacher: "1 п/г: Ушакова Е.П / 2 п/г: Резникова О.С." }
+                    ],
+                    "Пятница": [
+                        { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                        { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                        { num: 3, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." },
+                        { num: 4, subj: "Кл. час", room: "", teacher: "" }
+                    ]
+                }
             },
-            2: { // Неделя 2
-                "Понедельник": [
-                    { num: 0, subj: "Разговоры о важном", room: "2-110", teacher: "" },
-                    { num: 1, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
-                    { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
-                    { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                    { num: 4, subj: "Информатика", room: "212 / 2-204", teacher: "1 п/г: Ушакова Е.П / 2 п/г: Резникова О.С." }
-                ],
-                "Вторник": [
-                    { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
-                    { num: 2, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
-                    { num: 3, subj: "Рос.-моя ист", room: "2-312", teacher: "Маняев А.Г." },
-                    { num: 4, subj: "Информатика", room: "212", teacher: "Ушакова Е.П." }
-                ],
-                "Среда": [
-                    { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
-                    { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
-                    { num: 3, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
-                    { num: 4, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." }
-                ],
-                "Четверг": [
-                    { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
-                    { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                    { num: 4, subj: "Информатика", room: "212 / 2-204", teacher: "1 п/г: Ушакова Е.П / 2 п/г: Резникова О.С." }
-                ],
-                "Пятница": [
-                    { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
-                    { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
-                    { num: 3, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." },
-                    { num: 4, subj: "Кл. час", room: "", teacher: "" }
-                ]
+            "26 АТП-3Бо": {
+                1: { "Понедельник": [], "Вторник": [], "Среда": [], "Четверг": [], "Пятница": [] },
+                2: { "Понедельник": [], "Вторник": [], "Среда": [], "Четверг": [], "Пятница": [] }
             }
         };
+
+        let currentBetaGroup = "26 АТП-2Бо";
+        let isBetaGroupMenuOpen = false;
 
         // ==========================================
 
@@ -660,10 +687,9 @@
             if (isBetaOpen) {
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                betaWeekSelection = 'auto'; // Сброс на текущую неделю
-                updateBetaWeekUI();
-                renderBetaSchedule();
-                updateBetaTimer();
+                betaWeekSelection = 'auto';
+                currentBetaGroup = "26 АТП-2Бо";
+                selectBetaGroup(currentBetaGroup); // Сброс на дефолт
                 
                 // Скролл к текущему дню
                 setTimeout(() => {
@@ -681,6 +707,52 @@
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
+        }
+
+        function toggleBetaGroupMenu(e) {
+            e.stopPropagation();
+            isBetaGroupMenuOpen = !isBetaGroupMenuOpen;
+            const menu = document.getElementById('beta-group-menu');
+            const arrow = document.getElementById('beta-group-arrow');
+            if (isBetaGroupMenuOpen) {
+                menu.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                menu.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (isBetaGroupMenuOpen) {
+                const menu = document.getElementById('beta-group-menu');
+                if (!menu.contains(e.target) && e.target.id !== 'beta-group-toggle') {
+                    menu.classList.add('hidden');
+                    document.getElementById('beta-group-arrow').style.transform = 'rotate(0deg)';
+                    isBetaGroupMenuOpen = false;
+                }
+            }
+        });
+
+        function selectBetaGroup(group) {
+            currentBetaGroup = group;
+            document.getElementById('beta-group-label').innerText = group;
+            
+            if (group === '26 АТП-2Бо') {
+                document.getElementById('check-2bo').classList.remove('hidden');
+                document.getElementById('check-3bo').classList.add('hidden');
+            } else {
+                document.getElementById('check-2bo').classList.add('hidden');
+                document.getElementById('check-3bo').classList.remove('hidden');
+            }
+
+            document.getElementById('beta-group-menu').classList.add('hidden');
+            document.getElementById('beta-group-arrow').style.transform = 'rotate(0deg)';
+            isBetaGroupMenuOpen = false;
+            
+            updateBetaWeekUI();
+            renderBetaSchedule();
+            updateBetaTimer();
         }
 
         function setBetaWeek(dir) {
@@ -703,7 +775,7 @@
             const label = document.getElementById('beta-week-label');
             if (betaWeekSelection === 'auto') {
                 const current = getCurrentWeekNum();
-                label.innerText = `Текущая неделя (${current})`;
+                label.innerText = `Текущая (${current})`;
             } else {
                 label.innerText = `Неделя ${betaWeekSelection}`;
             }
@@ -962,19 +1034,31 @@
         // --- 7. БЕТА РАСПИСАНИЕ РЕНДЕР ---
         function renderBetaSchedule() {
             const week = getBetaWeekNum();
+            const groupData = groupsData[currentBetaGroup];
             const container = document.getElementById('beta-schedule-container');
             const days = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница"];
             
             const today = new Date().getDay();
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+
             let html = '';
 
             days.forEach((dayName, dayIndex) => {
-                const dayData = betaData[week][dayName];
-                if (!dayData) return;
+                const dayData = groupData && groupData[week] ? groupData[week][dayName] : null;
+                
+                // Если расписание пустое
+                if (!dayData || dayData.length === 0) {
+                    html += `
+                    <div class="glass-card rounded-2xl p-4 border border-[var(--border)] opacity-60">
+                        <h3 class="text-base font-bold text-main mb-2 flex items-center gap-2">${dayName}</h3>
+                        <p class="text-xs text-muted flex items-center gap-2"><i class="fas fa-ghost"></i> Нет пар</p>
+                    </div>`;
+                    return;
+                }
 
                 const isToday = (dayIndex + 1) === today;
-                
-                const todayClass = isToday ? 'border-2 border-brand bg-brand/10 shadow-[0_0_20px_var(--glow)] scale-[1.02] z-10' : 'border border-[var(--border)] opacity-80 hover:opacity-100';
+                const todayClass = isToday ? 'border-2 border-brand bg-brand/10 shadow-[0_0_20px_var(--glow)] z-10' : 'border border-[var(--border)] opacity-80 hover:opacity-100';
                 
                 html += `
                 <div class="glass-card rounded-2xl p-4 ${todayClass} transition-all duration-300 relative" id="beta-day-${dayIndex}">
@@ -994,17 +1078,26 @@
                     const times = getBellsTemplate(dayName, num, '1');
                     const timeStr = times.s2 ? `${formatTime(times.s1)}-${formatTime(times.e1)} / ${formatTime(times.s2)}-${formatTime(times.e2)}` : `${formatTime(times.s1)}-${formatTime(times.e1)}`;
                     
+                    // Подсветка текущей пары
+                    let isActive = false;
+                    if (isToday && times.s1 !== 0) {
+                        if (currentMinutes >= times.s1 && currentMinutes < times.e1) isActive = true;
+                        if (times.s2 && currentMinutes >= times.s2 && currentMinutes < times.e2) isActive = true;
+                    }
+
+                    const activeStyle = isActive ? 'bg-brand/10 border-brand scale-[1.01] shadow-[0_0_10px_var(--glow)]' : 'border-transparent';
+
                     html += `
-                    <div class="flex gap-3">
+                    <div class="flex gap-3 p-2 rounded-xl border transition-all ${activeStyle}">
                         <div class="flex flex-col items-center pt-1 w-6 shrink-0">
-                            <span class="text-[11px] font-bold text-muted">${item.num}</span>
+                            <span class="text-[11px] font-bold ${isActive ? 'text-brand' : 'text-muted'}">${item.num}</span>
                         </div>
                         <div class="flex-1 border-b border-dashed border-[var(--border)] pb-2">
                             <div class="flex justify-between items-start">
-                                <div class="font-bold text-main text-[14px]">${item.subj}</div>
-                                <div class="text-[11px] font-semibold text-muted whitespace-nowrap ml-2">${timeStr}</div>
+                                <div class="font-bold ${isActive ? 'text-brand' : 'text-main'} text-[14px]">${item.subj}</div>
+                                <div class="text-[11px] font-semibold ${isActive ? 'text-brand' : 'text-muted'} whitespace-nowrap ml-2">${timeStr}</div>
                             </div>
-                            <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-[11px] text-muted">
+                            <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-[11px] ${isActive ? 'text-brand' : 'text-muted'}">
                                 ${item.room ? `<span class="flex items-center gap-1"><i class="fas fa-door-open opacity-70"></i> ${item.room}</span>` : ''}
                                 ${item.teacher ? `<span class="flex items-center gap-1"><i class="fas fa-user-tie opacity-70"></i> ${item.teacher}</span>` : ''}
                             </div>
@@ -1187,6 +1280,7 @@
             const now = new Date();
             const day = now.getDay(); 
             const week = getBetaWeekNum();
+            const groupData = groupsData[currentBetaGroup];
             
             const titleEl = document.getElementById('beta-timer-title');
             const labelEl = document.getElementById('beta-timer-label');
@@ -1207,7 +1301,16 @@
             const daysArr = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница"];
             const currentDayName = daysArr[day - 1];
             
-            const todaySchedule = betaData[week][currentDayName] || [];
+            const todaySchedule = groupData && groupData[week] ? groupData[week][currentDayName] || [] : [];
+
+            if (todaySchedule.length === 0) {
+                labelEl.innerText = 'Статус';
+                titleEl.innerText = 'Расписание пустое';
+                countdownEl.innerText = 'Хорошего дня!';
+                iconEl.className = 'fas fa-ghost text-sm text-muted';
+                progressEl.style.strokeDashoffset = 263.89;
+                return;
+            }
             
             let currentEvent = null;
             let nextEvent = null;

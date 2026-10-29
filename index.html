@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Учебный Портал</title>
     
+    <!-- ИКОНКА САЙТА (FAVICON) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230079C2'/><path d='M50 25 L80 40 L50 55 L20 40 Z' fill='white'/><path d='M30 48 L30 65 Q30 75 50 75 Q70 75 70 65 L70 48' fill='none' stroke='white' stroke-width='8'/></svg>">
     
-    <link rel="manifest" href="manifest.json">
+    <!-- МЕТА-ТЕГИ ДЛЯ "МИНИ-АПП" -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Учебный Портал">
     <meta name="theme-color" content="#0079C2">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- ИКОНКИ (надежный CDN) -->
+    <!-- ИКОНКИ -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     
     <style>
@@ -54,6 +59,8 @@
             -webkit-font-smoothing: antialiased; 
             background-color: var(--bg-body); color: var(--text-main); 
             transition: background-color 0.3s ease, color 0.3s ease;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
         }
         
         .font-pixel { 
@@ -78,34 +85,28 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
         }
         
-        /* --- LIQUID GLASS (Оптимизированный) --- */
-        .is-glass .glass-card, .is-glass header {
-            /* Темная прозрачная основа */
+        /* --- LIQUID GLASS --- */
+        .is-glass .glass-card, .is-glass header, .is-glass #beta-modal {
             background: rgba(10, 17, 32, 0.4) !important; 
-            /* Слегка уменьшили blur для ФПС, но оставили сочность */
-            backdrop-filter: blur(12px) saturate(150%) !important;
-            -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+            backdrop-filter: blur(10px) saturate(150%) !important;
+            -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
-            
-            /* Оптимизация: заставляем браузер рендерить это на видеокарте */
-            will-change: backdrop-filter;
+            will-change: backdrop-filter, transform;
+            transform: translateZ(0);
         }
         
-        /* Отключаем прыжок при наведении в режиме стекла, чтобы не было лагов */
         .is-glass .glass-card:hover {
             transform: none;
             box-shadow: 0 0 20px var(--glow) !important;
         }
         
-        /* Для светлой темы */
-        .is-glass[data-theme="light"] .glass-card, .is-glass[data-theme="light"] header {
+        .is-glass[data-theme="light"] .glass-card, .is-glass[data-theme="light"] header, .is-glass[data-theme="light"] #beta-modal {
             background: rgba(255, 255, 255, 0.5) !important;
             border: 1px solid rgba(255, 255, 255, 0.6) !important;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
         }
 
-        /* Тени для текста на стекле */
         .is-glass .glass-card *, .is-glass header * {
             text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
@@ -138,13 +139,14 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
-        #zen-overlay {
+        #zen-overlay, #beta-modal {
             position: fixed; inset: 0; z-index: 9999;
             background-color: var(--bg-body);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            display: flex; flex-direction: column; align-items: center;
             opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+            overflow-y: auto;
         }
-        #zen-overlay.active { opacity: 1; pointer-events: auto; }
+        #zen-overlay.active, #beta-modal.active { opacity: 1; pointer-events: auto; }
         
         .hourglass-container { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
         .hourglass-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
@@ -169,13 +171,12 @@
 
     <canvas id="particles-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
 
+    <!-- ДЗЕН-РЕЖИМ -->
     <div id="zen-overlay">
         <button onclick="toggleZenMode()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-slate-500/20 text-main flex items-center justify-center hover:bg-slate-500/40 transition-colors">
             <i class="fas fa-times text-xl"></i>
         </button>
-        
         <p class="text-sm font-bold uppercase tracking-widest text-muted mb-2" id="zen-label">Идет 2 пара</p>
-        
         <div class="hourglass-container mb-8">
             <svg class="hourglass-svg" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" fill="none" stroke="var(--border)" stroke-width="8"></circle>
@@ -186,11 +187,70 @@
                 <span class="text-sm font-bold text-muted mt-1" id="zen-subtext">минут осталось</span>
             </div>
         </div>
-
         <div class="w-64 bg-slate-500/20 rounded-full h-3 overflow-hidden">
             <div id="zen-bar" class="h-full bg-brand transition-all duration-1000 ease-linear" style="width: 0%; background-color: var(--brand);"></div>
         </div>
         <p class="mt-8 text-xs text-muted max-w-xs text-center">Сфокусируйся на учебе. Время идет.</p>
+    </div>
+
+    <!-- БЕТА РАСПИСАНИЕ -->
+    <div id="beta-modal">
+        <div class="w-full max-w-md mx-auto p-4 pb-20">
+            <div class="flex items-center justify-between mb-4 pt-4">
+                <div>
+                    <h2 class="text-xl font-bold text-main flex items-center gap-2">
+                        <i class="fas fa-flask" style="color: var(--brand);"></i> Бета-режим
+                    </h2>
+                    <p class="text-[11px] text-red-400 font-bold mt-1">⚠️ Тестовый режим. Возможны неточности.</p>
+                </div>
+                <button onclick="toggleBeta()" class="w-10 h-10 rounded-full bg-slate-500/20 flex items-center justify-center text-main hover:bg-slate-500/40 transition-colors">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Переключатель недели -->
+            <div class="glass-card rounded-2xl p-2 mb-4 flex items-center justify-between border" style="border-color: var(--border);">
+                <button onclick="setBetaWeek('prev')" class="w-10 h-10 rounded-xl bg-slate-500/10 hover:bg-slate-500/20 flex items-center justify-center text-main"><i class="fas fa-chevron-left"></i></button>
+                <div class="text-center">
+                    <p class="text-[10px] uppercase font-bold text-muted">26 АТП-2Бо</p>
+                    <p class="font-bold text-main text-lg" id="beta-week-label">Текущая неделя (1)</p>
+                </div>
+                <button onclick="setBetaWeek('next')" class="w-10 h-10 rounded-xl bg-slate-500/10 hover:bg-slate-500/20 flex items-center justify-center text-main"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <!-- Таймер беты -->
+            <div class="glass-card rounded-3xl p-4 flex items-center gap-4 mb-4 border" style="border-color: var(--border);">
+                <div class="relative w-12 h-12 shrink-0 flex items-center justify-center">
+                    <svg class="w-full h-full" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="6" class="opacity-10 text-main"></circle>
+                        <circle id="beta-timer-progress" cx="50" cy="50" r="42" fill="none" stroke="var(--brand)" stroke-width="6" stroke-linecap="round" stroke-dasharray="263.89" stroke-dashoffset="0" class="timer-ring"></circle>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center" style="color: var(--brand);">
+                        <i class="fas fa-hourglass-half text-sm" id="beta-timer-icon"></i>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <p class="text-[10px] font-bold uppercase tracking-wider mb-0.5 text-muted" id="beta-timer-label">Сейчас</p>
+                    <h2 class="text-[15px] font-bold leading-tight text-main" id="beta-timer-title">Загрузка...</h2>
+                    <p class="text-[12px] font-semibold mt-0.5" style="color: var(--brand);" id="beta-timer-countdown">--:--</p>
+                </div>
+            </div>
+
+            <!-- Список расписания -->
+            <div id="beta-schedule-container" class="space-y-3">
+                <!-- Сюда рендерится расписание -->
+            </div>
+
+            <!-- Кнопка Сверить с оф. сайтом -->
+            <a href="https://volgograd-college.gazprom.ru/ochnaya-forma-obucheniya/" target="_blank" class="mt-6 w-full py-3 rounded-2xl bg-indigo-500/20 text-indigo-400 font-bold text-xs border border-indigo-500/30 hover:bg-indigo-500/30 transition-colors flex items-center justify-center gap-2">
+                <i class="fas fa-external-link-alt"></i> Сверить с оф. сайтом и заменами
+            </a>
+
+            <!-- Кнопка Назад -->
+            <button onclick="toggleBeta()" class="mt-3 w-full py-4 rounded-2xl bg-slate-800 text-main font-bold text-sm border border-slate-700 hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
+                <i class="fas fa-arrow-left"></i> Вернуться на главную
+            </button>
+        </div>
     </div>
 
     <!-- ШАПКА -->
@@ -265,7 +325,7 @@
             <i class="fas fa-download"></i> Установить на телефон
         </button>
 
-        <!-- ТАЙМЕР -->
+        <!-- ТАЙМЕР ОСНОВНОЙ -->
         <div id="timer-card" class="glass-card rounded-3xl p-4 flex items-center gap-4 animate-fade-up transition-all duration-500">
             <div class="relative w-14 h-14 shrink-0 flex items-center justify-center">
                 <svg class="w-full h-full" viewBox="0 0 100 100">
@@ -289,13 +349,19 @@
         </div>
 
         <!-- ПОГОДА -->
-        <div class="glass-card rounded-3xl p-4 animate-fade-up delay-1">
+        <div class="glass-card rounded-3xl p-4 animate-fade-up delay-1 relative">
             <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center gap-2">
                     <i class="fas fa-map-marker-alt text-[11px]" style="color: var(--brand);"></i>
                     <span class="text-[11px] font-bold uppercase text-muted">Волгоград</span>
                 </div>
-                <div class="text-[14px] font-bold text-main" id="weather-temp">--°</div>
+                <div class="flex items-center gap-2">
+                    <select id="weather-source" class="text-[10px] bg-transparent border-none text-muted font-bold focus:ring-0 cursor-pointer" onchange="fetchWeather()">
+                        <option value="wttr">wttr.in</option>
+                        <option value="open-meteo">Open-Meteo</option>
+                    </select>
+                    <div class="text-[14px] font-bold text-main" id="weather-temp">--°</div>
+                </div>
             </div>
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2">
@@ -309,7 +375,7 @@
             </div>
         </div>
 
-        <!-- ГЛАВНАЯ КНОПКА -->
+        <!-- ГЛАВНАЯ КНОПКА (PDF) -->
         <a href="https://volgograd-college.gazprom.ru/ochnaya-forma-obucheniya/" target="_blank"
            class="group block relative overflow-hidden rounded-3xl p-5 animate-fade-up delay-2 active:scale-[0.98] transition-all border-2"
            style="background: linear-gradient(135deg, var(--brand), var(--bg-hover)); border-color: var(--brand); box-shadow: 0 10px 25px -5px var(--glow);">
@@ -325,7 +391,21 @@
             </div>
         </a>
 
-        <!-- ЗВОНКИ -->
+        <!-- КНОПКА БЕТА -->
+        <button onclick="toggleBeta()" class="w-full glass-card rounded-2xl p-4 flex items-center justify-between animate-fade-up delay-2 active:scale-[0.98] transition-all border" style="border-color: var(--border);">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-indigo-500/20 text-indigo-400">
+                    <i class="fas fa-flask text-lg"></i>
+                </div>
+                <div class="text-left">
+                    <h3 class="font-bold text-main text-[15px] flex items-center gap-2">Пробное расписание <span class="bg-indigo-500 text-white text-[9px] px-1.5 py-0.5 rounded uppercase font-bold">Beta</span></h3>
+                    <p class="text-[11px] text-muted mt-0.5">26 АТП-2Бо • Тестовый режим</p>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right text-muted"></i>
+        </button>
+
+        <!-- ЗВОНКИ (ОСНОВНЫЕ) -->
         <div class="glass-card rounded-3xl p-4 animate-fade-up delay-3">
             <div class="flex items-center justify-between mb-3">
                 <h3 class="text-[14px] font-bold flex items-center gap-2 text-main">
@@ -341,7 +421,7 @@
             </div>
         </div>
 
-        <!-- ДОПОЛНИТЕЛЬНО -->
+        <!-- ДОПОЛНИТЕЛЬНО (ЭБС) -->
         <div class="glass-card rounded-3xl overflow-hidden animate-fade-up delay-3">
             <button onclick="toggleExtra()" class="w-full p-4 flex items-center justify-between text-[13px] font-bold text-main hover:bg-slate-500/5 transition-colors">
                 <span><i class="fas fa-book-reader mr-2" style="color: var(--brand);"></i> Дополнительно (Библиотеки)</span>
@@ -374,6 +454,79 @@
     </footer>
 
     <script>
+        // ==========================================
+        // БАЗА ДАННЫХ РАСПИСАНИЯ (БЕТА) - 26 АТП-2Бо
+        // ==========================================
+        const betaData = {
+            group: "26 АТП-2Бо",
+            1: { // Неделя 1
+                "Понедельник": [
+                    { num: 0, subj: "Разговоры о важном", room: "2-110", teacher: "" },
+                    { num: 1, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                    { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                    { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                    { num: 4, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." }
+                ],
+                "Вторник": [
+                    { num: 1, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                    { num: 2, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
+                    { num: 3, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                    { num: 4, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." }
+                ],
+                "Среда": [
+                    { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                    { num: 2, subj: "Рос.-моя ист", room: "2-312", teacher: "Маняев А.Г." },
+                    { num: 3, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." }
+                ],
+                "Четверг": [
+                    { num: 2, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                    { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                    { num: 4, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                    { num: 5, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." }
+                ],
+                "Пятница": [
+                    { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                    { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                    { num: 3, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                    { num: 4, subj: "Кл. час", room: "", teacher: "" }
+                ]
+            },
+            2: { // Неделя 2
+                "Понедельник": [
+                    { num: 0, subj: "Разговоры о важном", room: "2-110", teacher: "" },
+                    { num: 1, subj: "Литература", room: "320общ", teacher: "Невзорова М.С." },
+                    { num: 2, subj: "Физика", room: "2-307", teacher: "Бондарь А.С." },
+                    { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                    { num: 4, subj: "Информатика", room: "212 / 2-204", teacher: "1 п/г: Ушакова Е.П / 2 п/г: Резникова О.С." }
+                ],
+                "Вторник": [
+                    { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                    { num: 2, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                    { num: 3, subj: "Рос.-моя ист", room: "2-312", teacher: "Маняев А.Г." },
+                    { num: 4, subj: "Информатика", room: "212", teacher: "Ушакова Е.П." }
+                ],
+                "Среда": [
+                    { num: 1, subj: "История", room: "116общ", teacher: "Клепикова Л.П." },
+                    { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
+                    { num: 3, subj: "Физ. культура", room: "Манеж", teacher: "Бабичева Г.В." },
+                    { num: 4, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." }
+                ],
+                "Четверг": [
+                    { num: 2, subj: "Химия", room: "317общ", teacher: "Александрова О.Н." },
+                    { num: 3, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                    { num: 4, subj: "Информатика", room: "212 / 2-204", teacher: "1 п/г: Ушакова Е.П / 2 п/г: Резникова О.С." }
+                ],
+                "Пятница": [
+                    { num: 1, subj: "Рус. яз.", room: "2-311", teacher: "Королева В.А." },
+                    { num: 2, subj: "Математика", room: "2-213", teacher: "Зайцева Н.Н." },
+                    { num: 3, subj: "Ин. яз", room: "2-311", teacher: "Королева В.А." },
+                    { num: 4, subj: "Кл. час", room: "", teacher: "" }
+                ]
+            }
+        };
+
+        // ==========================================
+
         function getStorage(key) {
             try { return localStorage.getItem(key); } catch(e) { return null; }
         }
@@ -410,11 +563,9 @@
         function setTheme(theme) {
             document.body.setAttribute('data-theme', theme);
             setStorage('app_theme', theme);
-            
             if (theme === 'matrix') {
                 document.getElementById('secret-theme-container').classList.remove('hidden');
             }
-            
             initParticles(); 
             switchCourse(currentCourse); 
             themeMenu.classList.add('hidden');
@@ -422,15 +573,11 @@
 
         const savedTheme = getStorage('app_theme') || 'gazprom';
         document.body.setAttribute('data-theme', savedTheme);
-        
         if (savedTheme === 'matrix') {
             document.getElementById('secret-theme-container').classList.remove('hidden');
         }
-
-        // Дефолтный шрифт - пиксельный
         const savedFont = getStorage('app_font') || 'font-pixel';
         document.body.classList.add(savedFont);
-
         if (getStorage('app_glass') === 'true') {
             document.body.classList.add('is-glass');
         }
@@ -462,20 +609,22 @@
             });
         }
 
-        // --- 3. НЕДЕЛЯ ---
+        // --- 3. НЕДЕЛЯ (ОБЩАЯ) ---
         const START_DATE = new Date('2026-10-26T00:00:00');
 
-        function updateWeekUI() {
+        function getCurrentWeekNum() {
             const today = new Date();
-            const weekEl = document.getElementById('week-indicator');
-            
-            if (today < START_DATE) { weekEl.innerText = "1 неделя"; return; }
+            if (today < START_DATE) return 1;
             const diffDays = Math.floor((today - START_DATE) / (1000 * 60 * 60 * 24));
-            const weekNum = Math.floor(diffDays / 7);
-            weekEl.innerText = (weekNum % 2 === 0) ? "1 неделя" : "2 неделя";
+            return (Math.floor(diffDays / 7) % 2 === 0) ? 1 : 2;
         }
 
-        // --- 4. ДОПОЛНИТЕЛЬНО И ДЗЕН ---
+        function updateWeekUI() {
+            const weekNum = getCurrentWeekNum();
+            document.getElementById('week-indicator').innerText = weekNum === 1 ? "1 неделя" : "2 неделя";
+        }
+
+        // --- 4. ДЗЕН И БЕТА ---
         function toggleExtra() {
             const content = document.getElementById('extra-content');
             const icon = document.getElementById('extra-icon');
@@ -502,8 +651,73 @@
             }
         }
 
+        let isBetaOpen = false;
+        let betaWeekSelection = 'auto';
+
+        function toggleBeta() {
+            isBetaOpen = !isBetaOpen;
+            const modal = document.getElementById('beta-modal');
+            if (isBetaOpen) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                betaWeekSelection = 'auto'; // Сброс на текущую неделю
+                updateBetaWeekUI();
+                renderBetaSchedule();
+                updateBetaTimer();
+                
+                // Скролл к текущему дню
+                setTimeout(() => {
+                    const today = new Date().getDay();
+                    let focusIndex = today - 1;
+                    const now = new Date();
+                    if (now.getHours() >= 16 || today === 0 || today === 6) {
+                        focusIndex = (focusIndex + 1) % 5;
+                    }
+                    const dayEl = document.getElementById(`beta-day-${focusIndex}`);
+                    if (dayEl) dayEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+                
+            } else {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function setBetaWeek(dir) {
+            const current = getCurrentWeekNum();
+            if (dir === 'next') {
+                if (betaWeekSelection === 'auto') betaWeekSelection = current === 1 ? '2' : '1';
+                else if (betaWeekSelection === '1') betaWeekSelection = '2';
+                else if (betaWeekSelection === '2') betaWeekSelection = '1';
+            } else {
+                if (betaWeekSelection === 'auto') betaWeekSelection = current === 1 ? '2' : '1';
+                else if (betaWeekSelection === '1') betaWeekSelection = '2';
+                else if (betaWeekSelection === '2') betaWeekSelection = '1';
+            }
+            updateBetaWeekUI();
+            renderBetaSchedule();
+            updateBetaTimer();
+        }
+
+        function updateBetaWeekUI() {
+            const label = document.getElementById('beta-week-label');
+            if (betaWeekSelection === 'auto') {
+                const current = getCurrentWeekNum();
+                label.innerText = `Текущая неделя (${current})`;
+            } else {
+                label.innerText = `Неделя ${betaWeekSelection}`;
+            }
+        }
+
+        function getBetaWeekNum() {
+            return betaWeekSelection === 'auto' ? getCurrentWeekNum() : parseInt(betaWeekSelection);
+        }
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isZen) toggleZenMode();
+            if (e.key === 'Escape') {
+                if (isZen) toggleZenMode();
+                if (isBetaOpen) toggleBeta();
+            }
         });
 
         // --- 5. ЧАСТИЦЫ ---
@@ -589,42 +803,71 @@
             }
         }
 
-        // --- 6. ЗВОНКИ ---
-        function getBellsSchedule(course) {
-            const today = new Date().getDay(); 
-            const isMonday = (today === 1 || today === 0 || today === 6); 
-
+        // --- 6. ШАБЛОН ЗВОНКОВ ---
+        function getBellsTemplate(dayName, num, course = '1') {
+            const isMonday = (dayName === 'Понедельник');
+            
             if (course === '1') {
                 if (isMonday) {
-                    return [
-                        { num: 1, name: 'Разговоры о важном', t1s: 9*60+20, t1e: 10*60+5, t2s: null, t2e: null },
-                        { num: 2, name: '2 пара', t1s: 10*60+15, t1e: 11*60, t2s: 11*60+30, t2e: 12*60+15 },
-                        { num: 3, name: '3 пара', t1s: 12*60+25, t1e: 13*60+10, t2s: 13*60+15, t2e: 14*60 },
-                        { num: 4, name: '4 пара', t1s: 14*60+10, t1e: 14*60+55, t2s: 15*60, t2e: 15*60+45 },
-                        { num: 5, name: '5 пара', t1s: 16*60+15, t1e: 17*60, t2s: 17*60+5, t2e: 17*60+50 }
-                    ];
+                    if (num === 0) return { s1: 9*60+20, e1: 10*60+5, s2: null, e2: null };
+                    if (num === 1) return { s1: 10*60+15, e1: 11*60, s2: 11*60+30, e2: 12*60+15 };
+                    if (num === 2) return { s1: 12*60+25, e1: 13*60+10, s2: 13*60+15, e2: 14*60 };
+                    if (num === 3) return { s1: 14*60+10, e1: 14*60+55, s2: 15*60, e2: 15*60+45 };
+                    if (num === 4) return { s1: 16*60+15, e1: 17*60, s2: 17*60+5, e2: 17*60+50 };
                 } else {
-                    return [
-                        { num: 1, name: '1 пара', t1s: 8*60+30, t1e: 9*60+15, t2s: 9*60+20, t2e: 10*60+5 },
-                        { num: 2, name: '2 пара', t1s: 10*60+15, t1e: 11*60, t2s: 11*60+30, t2e: 12*60+15 },
-                        { num: 3, name: '3 пара', t1s: 12*60+25, t1e: 13*60+10, t2s: 13*60+15, t2e: 14*60 },
-                        { num: 4, name: '4 пара', t1s: 14*60+10, t1e: 14*60+55, t2s: 15*60, t2e: 15*60+45 },
-                        { num: 5, name: '5 пара', t1s: 16*60+15, t1e: 17*60, t2s: 17*60+5, t2e: 17*60+50 }
-                    ];
+                    if (num === 1) return { s1: 8*60+30, e1: 9*60+15, s2: 9*60+20, e2: 10*60+5 };
+                    if (num === 2) return { s1: 10*60+15, e1: 11*60, s2: 11*60+30, e2: 12*60+15 };
+                    if (num === 3) return { s1: 12*60+25, e1: 13*60+10, s2: 13*60+15, e2: 14*60 };
+                    if (num === 4) return { s1: 14*60+10, e1: 14*60+55, s2: 15*60, e2: 15*60+45 };
+                    if (num === 5) return { s1: 16*60+15, e1: 17*60, s2: 17*60+5, e2: 17*60+50 };
                 }
             } else {
-                return [
-                    { num: 1, name: '1 пара', t1s: 8*60+30, t1e: 9*60+15, t2s: 9*60+20, t2e: 10*60+5 },
-                    { num: 2, name: '2 пара', t1s: 10*60+15, t1e: 11*60, t2s: 11*60+5, t2e: 11*60+50 },
-                    { num: 3, name: '3 пара', t1s: 12*60+25, t1e: 13*60+10, t2s: 13*60+15, t2e: 14*60 },
-                    { num: 4, name: '4 пара', t1s: 14*60+10, t1e: 14*60+55, t2s: 15*60, t2e: 15*60+45 },
-                    { num: 5, name: '5 пара', t1s: 15*60+55, t1e: 16*60+40, t2s: 16*60+45, t2e: 17*60+30 }
-                ];
+                if (num === 1) return { s1: 8*60+30, e1: 9*60+15, s2: 9*60+20, e2: 10*60+5 };
+                if (num === 2) return { s1: 10*60+15, e1: 11*60, s2: 11*60+5, e2: 11*60+50 };
+                if (num === 3) return { s1: 12*60+25, e1: 13*60+10, s2: 13*60+15, e2: 14*60 };
+                if (num === 4) return { s1: 14*60+10, e1: 14*60+55, s2: 15*60, e2: 15*60+45 };
+                if (num === 5) return { s1: 15*60+55, e1: 16*60+40, s2: 16*60+45, e2: 17*60+30 };
             }
+            return { s1: 0, e1: 0, s2: null, e2: null };
+        }
+
+        function getMainBellsSchedule(course) {
+            const today = new Date().getDay();
+            const daysArr = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+            const dayName = (today === 0 || today === 6) ? "Понедельник" : daysArr[today];
+            
+            let schedule = [];
+            
+            if (course === '1') {
+                if (dayName === 'Понедельник') {
+                    schedule.push({ type: 'pair', num: 0, name: '0 пара', t1s: 560, t1e: 605 });
+                    schedule.push({ type: 'pair', num: 1, name: '1 пара', t1s: 615, t1e: 660, t2s: 690, t2e: 735 });
+                    schedule.push({ type: 'break', name: 'Обед', time: '11:00 – 11:30' });
+                    schedule.push({ type: 'pair', num: 2, name: '2 пара', t1s: 745, t1e: 790, t2s: 795, t2e: 840 });
+                    schedule.push({ type: 'pair', num: 3, name: '3 пара', t1s: 850, t1e: 895, t2s: 900, t2e: 945 });
+                    schedule.push({ type: 'break', name: 'Перерыв', time: '15:45 – 16:15' });
+                    schedule.push({ type: 'pair', num: 4, name: '4 пара', t1s: 975, t1e: 1020, t2s: 1025, t2e: 1070 });
+                } else {
+                    schedule.push({ type: 'pair', num: 1, name: '1 пара', t1s: 510, t1e: 555, t2s: 560, t2e: 605 });
+                    schedule.push({ type: 'pair', num: 2, name: '2 пара', t1s: 615, t1e: 660, t2s: 690, t2e: 735 });
+                    schedule.push({ type: 'break', name: 'Обед', time: '11:00 – 11:30' });
+                    schedule.push({ type: 'pair', num: 3, name: '3 пара', t1s: 745, t1e: 790, t2s: 795, t2e: 840 });
+                    schedule.push({ type: 'pair', num: 4, name: '4 пара', t1s: 850, t1e: 895, t2s: 900, t2e: 945 });
+                    schedule.push({ type: 'break', name: 'Перерыв', time: '15:45 – 16:15' });
+                    schedule.push({ type: 'pair', num: 5, name: '5 пара', t1s: 975, t1e: 1020, t2s: 1025, t2e: 1070 });
+                }
+            } else {
+                schedule.push({ type: 'pair', num: 1, name: '1 пара', t1s: 510, t1e: 555, t2s: 560, t2e: 605 });
+                schedule.push({ type: 'pair', num: 2, name: '2 пара', t1s: 615, t1e: 660, t2s: 665, t2e: 710 });
+                schedule.push({ type: 'break', name: 'Обед', time: '11:50 – 12:25' });
+                schedule.push({ type: 'pair', num: 3, name: '3 пара', t1s: 745, t1e: 790, t2s: 795, t2e: 840 });
+                schedule.push({ type: 'pair', num: 4, name: '4 пара', t1s: 850, t1e: 895, t2s: 900, t2e: 945 });
+                schedule.push({ type: 'pair', num: 5, name: '5 пара', t1s: 955, t1e: 1000, t2s: 1005, t2e: 1050 });
+            }
+            return schedule;
         }
 
         let currentCourse = '1';
-
         function switchCourse(course) {
             currentCourse = course;
             const btn1 = document.getElementById('btn-c1');
@@ -652,52 +895,58 @@
 
         function renderBellsList() {
             const container = document.getElementById('bells-container');
-            const data = getBellsSchedule(currentCourse);
+            const data = getMainBellsSchedule(currentCourse);
             let html = '';
 
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+
             data.forEach((item, index) => {
-                const hasSecondPart = item.t2s !== null;
-                const pairLabel = item.name.includes('пара') ? item.name : `${item.num} пара`;
-                const subLabel = item.name.includes('пара') ? '' : item.name;
-
-                html += `
-                <div class="flex flex-col p-3.5 rounded-xl border ${index === 0 ? 'mt-0' : 'mt-2'}" style="background-color: var(--bg-body); border-color: var(--border);" id="pair-card-${item.num}">
+                if (item.type === 'pair') {
+                    const hasSecondPart = item.t2s !== null;
                     
-                    <div class="flex justify-between items-center mb-1.5">
-                        <div class="font-bold text-[15px] text-main flex items-center gap-2">
-                            <i class="fas fa-book text-[12px] opacity-50"></i> ${pairLabel}
+                    let isPart1Active = (currentMinutes >= item.t1s && currentMinutes < item.t1e);
+                    let isPart2Active = (hasSecondPart && currentMinutes >= item.t2s && currentMinutes < item.t2e);
+                    
+                    let part1Class = isPart1Active ? 'text-brand font-bold scale-105' : 'text-muted font-medium';
+                    let part2Class = isPart2Active ? 'text-brand font-bold scale-105' : 'text-muted font-medium';
+                    
+                    let cardStyle = (isPart1Active || isPart2Active) ? 'border-color: var(--brand); background-color: var(--bg-hover);' : 'background-color: var(--bg-body); border-color: var(--border);';
+
+                    html += `
+                    <div class="flex flex-col p-3.5 rounded-xl border ${index === 0 ? 'mt-0' : 'mt-2'} transition-all duration-300" style="${cardStyle}">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <div class="font-bold text-[15px] text-main flex items-center gap-2">
+                                <i class="fas fa-book text-[12px] opacity-50"></i> ${item.name}
+                            </div>
+                            <div class="text-[13px] font-bold text-main">${formatTime(item.t1s)} – ${formatTime(hasSecondPart ? item.t2e : item.t1e)}</div>
                         </div>
-                        <div class="text-[13px] font-bold text-main">${formatTime(item.t1s)} – ${formatTime(hasSecondPart ? item.t2e : item.t1e)}</div>
-                    </div>
-                    ${subLabel ? `<div class="text-[11px] text-muted mb-1 font-medium pl-5">${subLabel}</div>` : ''}
-
-                    <div class="flex justify-between items-center text-[12px] mt-1 pl-5">
-                        <div class="text-muted font-medium"><i class="fas fa-hourglass-start text-[10px] mr-1.5"></i> 1 часть</div>
-                        <div class="font-semibold text-muted">${formatTime(item.t1s)} – ${formatTime(item.t1e)}</div>
-                    </div>
-                    ${hasSecondPart ? `
-                    <div class="flex justify-between items-center text-[12px] mt-1.5 pl-5">
-                        <div class="text-muted font-medium"><i class="fas fa-hourglass-end text-[10px] mr-1.5"></i> 2 часть</div>
-                        <div class="font-semibold text-muted">${formatTime(item.t2s)} – ${formatTime(item.t2e)}</div>
-                    </div>
-                    ` : ''}
-
-                </div>`;
-                
-                if (item.num === 2) {
-                    const lunchStart = currentCourse === '1' && new Date().getDay() === 1 ? 11*60 : (currentCourse === '1' ? 11*60 : 11*60+50);
-                    const lunchEnd = currentCourse === '1' && new Date().getDay() === 1 ? 11*60+30 : (currentCourse === '1' ? 11*60+30 : 12*60+25);
-                    html += `
-                    <div class="flex justify-between items-center py-2.5 px-3 my-2 rounded-lg font-bold text-[12px]" style="color: var(--brand); background-color: var(--bg-hover); border: 1px solid var(--border);">
-                        <span class="flex items-center gap-2"><i class="fas fa-coffee"></i> Обед</span>
-                        <span>${formatTime(lunchStart)} – ${formatTime(lunchEnd)}</span>
+                        <div class="flex justify-between items-center text-[12px] mt-1 pl-5 transition-all ${part1Class}">
+                            <div class="flex items-center gap-1.5"><i class="fas fa-hourglass-start text-[10px]"></i> 1 часть</div>
+                            <div>${formatTime(item.t1s)} – ${formatTime(item.t1e)}</div>
+                        </div>
+                        ${hasSecondPart ? `
+                        <div class="flex justify-between items-center text-[12px] mt-1.5 pl-5 transition-all ${part2Class}">
+                            <div class="flex items-center gap-1.5"><i class="fas fa-hourglass-end text-[10px]"></i> 2 часть</div>
+                            <div>${formatTime(item.t2s)} – ${formatTime(item.t2e)}</div>
+                        </div>
+                        ` : ''}
                     </div>`;
-                }
-                if (item.num === 4 && currentCourse === '1') {
+                } else if (item.type === 'break') {
+                    let isBreakActive = false;
+                    const [startStr, endStr] = item.time.split(' – ');
+                    const [sh, sm] = startStr.split(':').map(Number);
+                    const [eh, em] = endStr.split(':').map(Number);
+                    if (currentMinutes >= sh*60+sm && currentMinutes < eh*60+em) isBreakActive = true;
+
+                    let breakStyle = isBreakActive ? 'border-color: var(--brand); background-color: var(--bg-hover);' : 'background-color: var(--bg-body); border-color: var(--border); opacity-70';
+
                     html += `
-                    <div class="flex justify-between items-center py-2.5 px-3 my-2 rounded-lg font-bold text-[12px]" style="color: var(--brand); background-color: var(--bg-hover); border: 1px solid var(--border);">
-                        <span class="flex items-center gap-2"><i class="fas fa-walking"></i> Перерыв</span>
-                        <span>15:45 – 16:15</span>
+                    <div class="flex justify-between items-center p-3 my-2 rounded-xl border transition-all ${isBreakActive ? 'active-pair' : ''}" style="${breakStyle}">
+                        <div class="font-bold text-[13px] flex items-center gap-2 ${isBreakActive ? 'text-brand' : 'text-muted'}">
+                            <i class="fas fa-coffee"></i> ${item.name}
+                        </div>
+                        <div class="text-[12px] font-bold ${isBreakActive ? 'text-brand' : 'text-muted'}">${item.time}</div>
                     </div>`;
                 }
             });
@@ -710,7 +959,97 @@
             return `${num} пар`;
         }
 
-        // --- 7. ТАЙМЕР ---
+        // --- 7. БЕТА РАСПИСАНИЕ РЕНДЕР ---
+        function renderBetaSchedule() {
+            const week = getBetaWeekNum();
+            const container = document.getElementById('beta-schedule-container');
+            const days = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница"];
+            
+            const today = new Date().getDay();
+            let html = '';
+
+            days.forEach((dayName, dayIndex) => {
+                const dayData = betaData[week][dayName];
+                if (!dayData) return;
+
+                const isToday = (dayIndex + 1) === today;
+                
+                const todayClass = isToday ? 'border-2 border-brand bg-brand/10 shadow-[0_0_20px_var(--glow)] scale-[1.02] z-10' : 'border border-[var(--border)] opacity-80 hover:opacity-100';
+                
+                html += `
+                <div class="glass-card rounded-2xl p-4 ${todayClass} transition-all duration-300 relative" id="beta-day-${dayIndex}">
+                    ${isToday ? '<div class="absolute top-0 right-0 bg-brand text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl rounded-tr-xl uppercase shadow-lg">Сегодня</div>' : ''}
+                    <div class="flex justify-between items-center mb-3 mt-1">
+                        <h3 class="text-base font-bold text-main flex items-center gap-2">
+                            ${dayName}
+                        </h3>
+                    </div>
+                    <div class="space-y-3">`;
+
+                // Перебираем возможные пары от 0 до 5
+                for (let num = 0; num <= 5; num++) {
+                    const item = dayData.find(x => x.num === num);
+                    if (!item) continue;
+
+                    const times = getBellsTemplate(dayName, num, '1');
+                    const timeStr = times.s2 ? `${formatTime(times.s1)}-${formatTime(times.e1)} / ${formatTime(times.s2)}-${formatTime(times.e2)}` : `${formatTime(times.s1)}-${formatTime(times.e1)}`;
+                    
+                    html += `
+                    <div class="flex gap-3">
+                        <div class="flex flex-col items-center pt-1 w-6 shrink-0">
+                            <span class="text-[11px] font-bold text-muted">${item.num}</span>
+                        </div>
+                        <div class="flex-1 border-b border-dashed border-[var(--border)] pb-2">
+                            <div class="flex justify-between items-start">
+                                <div class="font-bold text-main text-[14px]">${item.subj}</div>
+                                <div class="text-[11px] font-semibold text-muted whitespace-nowrap ml-2">${timeStr}</div>
+                            </div>
+                            <div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-[11px] text-muted">
+                                ${item.room ? `<span class="flex items-center gap-1"><i class="fas fa-door-open opacity-70"></i> ${item.room}</span>` : ''}
+                                ${item.teacher ? `<span class="flex items-center gap-1"><i class="fas fa-user-tie opacity-70"></i> ${item.teacher}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>`;
+                    
+                    // Вставляем обед визуально после 1-й половины 2-й пары (если это 2-я пара по счету, но в шаблоне это num===2)
+                    if (num === 2 && times.s2) {
+                         html += `
+                        <div class="flex gap-3 opacity-70">
+                            <div class="flex flex-col items-center pt-1 w-6 shrink-0">
+                                <span class="text-[11px] font-bold text-muted"><i class="fas fa-coffee"></i></span>
+                            </div>
+                            <div class="flex-1 pb-2">
+                                <div class="flex justify-between items-start">
+                                    <div class="font-bold text-main text-[14px] text-brand">Обед</div>
+                                    <div class="text-[11px] font-semibold text-muted whitespace-nowrap ml-2">11:00 - 11:30</div>
+                                </div>
+                            </div>
+                        </div>`;
+                    }
+                    // Вставляем перерыв после 4-й пары
+                    if (num === 4 && times.s2) {
+                        html += `
+                       <div class="flex gap-3 opacity-70">
+                           <div class="flex flex-col items-center pt-1 w-6 shrink-0">
+                               <span class="text-[11px] font-bold text-muted"><i class="fas fa-walking"></i></span>
+                           </div>
+                           <div class="flex-1 pb-2">
+                               <div class="flex justify-between items-start">
+                                   <div class="font-bold text-main text-[14px] text-brand">Перерыв</div>
+                                   <div class="text-[11px] font-semibold text-muted whitespace-nowrap ml-2">15:45 - 16:15</div>
+                               </div>
+                           </div>
+                       </div>`;
+                   }
+                }
+
+                html += `</div></div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // --- 8. ТАЙМЕРЫ ---
         function updateLiveTimer() {
             const now = new Date();
             const day = now.getDay(); 
@@ -726,10 +1065,6 @@
             const zenSubtext = document.getElementById('zen-subtext');
             const zenProgress = document.getElementById('zen-progress');
             const zenBar = document.getElementById('zen-bar');
-
-            document.querySelectorAll('[id^="pair-card-"]').forEach(el => {
-                el.classList.remove('active-pair');
-            });
 
             if (day === 0 || day === 6) {
                 labelEl.innerText = 'Выходной';
@@ -747,44 +1082,27 @@
             }
 
             const currentMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
-            const data = getBellsSchedule(currentCourse);
+            const data = getMainBellsSchedule(currentCourse);
             
             let currentEvent = null;
             let nextEvent = null;
-            let activePairNum = null;
 
             for (let i = 0; i < data.length; i++) {
                 const item = data[i];
-                if (currentMinutes >= item.t1s && currentMinutes < item.t1e) {
-                    currentEvent = { type: 'pair1', item: item, start: item.t1s, end: item.t1e };
-                    activePairNum = item.num;
-                    break;
-                }
-                if (item.t2s && currentMinutes >= item.t2s && currentMinutes < item.t2e) {
-                    currentEvent = { type: 'pair2', item: item, start: item.t2s, end: item.t2e };
-                    activePairNum = item.num;
-                    break;
-                }
-                if (item.num === 2) {
-                    const lunchStart = currentCourse === '1' && day === 1 ? 11*60 : (currentCourse === '1' ? 11*60 : 11*60+50);
-                    const lunchEnd = currentCourse === '1' && day === 1 ? 11*60+30 : (currentCourse === '1' ? 11*60+30 : 12*60+25);
-                    if (currentMinutes >= lunchStart && currentMinutes < lunchEnd) {
-                        currentEvent = { type: 'break', name: 'Обед', start: lunchStart, end: lunchEnd };
-                        break;
+                if (item.type === 'pair') {
+                    if (currentMinutes >= item.t1s && currentMinutes < item.t1e) {
+                        currentEvent = { type: '1 часть', subject: item.name, start: item.t1s, end: item.t1e }; break;
                     }
-                }
-                if (item.num === 4 && currentCourse === '1') {
-                    if (currentMinutes >= 15*60+45 && currentMinutes < 16*60+15) {
-                        currentEvent = { type: 'break', name: 'Перерыв', start: 15*60+45, end: 16*60+15 };
-                        break;
+                    if (item.t2s && currentMinutes >= item.t2s && currentMinutes < item.t2e) {
+                        currentEvent = { type: '2 часть', subject: item.name, start: item.t2s, end: item.t2e }; break;
                     }
-                }
-            }
-
-            if (activePairNum !== null) {
-                const el = document.getElementById(`pair-card-${activePairNum}`);
-                if (el) {
-                    el.classList.add('active-pair');
+                } else if (item.type === 'break') {
+                    const [startStr, endStr] = item.time.split(' – ');
+                    const [sh, sm] = startStr.split(':').map(Number);
+                    const [eh, em] = endStr.split(':').map(Number);
+                    if (currentMinutes >= sh*60+sm && currentMinutes < eh*60+em) {
+                        currentEvent = { type: 'Перерыв', subject: item.name, start: sh*60+sm, end: eh*60+em }; break;
+                    }
                 }
             }
 
@@ -798,21 +1116,16 @@
                 let hours = Math.floor(min / 60);
                 min = min % 60;
 
-                if (currentEvent.type === 'break') {
-                    labelEl.innerText = 'Перерыв';
-                    titleEl.innerText = currentEvent.name;
-                    iconEl.className = 'fas fa-mug-hot text-lg';
-                } else {
-                    labelEl.innerText = currentEvent.type === 'pair2' ? '2 часть' : '1 часть';
-                    titleEl.innerText = currentEvent.item.name;
-                    iconEl.className = 'fas fa-book-open text-lg';
-                }
-
+                labelEl.innerText = currentEvent.type;
+                titleEl.innerText = currentEvent.subject;
+                
                 let timeStr = hours > 0 ? `${hours} ч ${min} мин` : `${min}:${String(sec).padStart(2, '0')}`;
                 countdownEl.innerText = `До конца: ${timeStr}`;
+                iconEl.className = currentEvent.type === 'Перерыв' ? 'fas fa-mug-hot text-lg' : 'fas fa-book-open text-lg';
+                
                 progressEl.style.strokeDashoffset = 263.89 * (passed / total);
 
-                zenLabel.innerText = currentEvent.type === 'break' ? 'Перерыв' : `${currentEvent.item.name}`;
+                zenLabel.innerText = currentEvent.type;
                 zenTime.innerText = hours > 0 ? `${hours}:${String(min).padStart(2, '0')}` : `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
                 zenSubtext.innerText = hours > 0 ? 'часов осталось' : 'минут осталось';
                 
@@ -823,8 +1136,13 @@
             } else {
                 for (let i = 0; i < data.length; i++) {
                     const item = data[i];
-                    if (item.t1s > currentMinutes) { nextEvent = { name: item.name, start: item.t1s, num: item.num }; break; }
-                    if (item.t2s && item.t2s > currentMinutes) { nextEvent = { name: item.name, start: item.t2s, num: item.num }; break; }
+                    if (item.type === 'pair') {
+                        if (item.t1s > currentMinutes) { nextEvent = { subject: item.name, start: item.t1s, num: item.num }; break; }
+                    } else if (item.type === 'break') {
+                        const [startStr] = item.time.split(' – ');
+                        const [sh, sm] = startStr.split(':').map(Number);
+                        if (sh*60+sm > currentMinutes) { nextEvent = { subject: item.name, start: sh*60+sm, num: -1 }; break; }
+                    }
                 }
 
                 if (nextEvent) {
@@ -835,12 +1153,7 @@
                     min = min % 60;
                     
                     labelEl.innerText = 'До начала';
-                    
-                    if (nextEvent.name.includes('пара')) {
-                        titleEl.innerText = getPairGenitive(nextEvent.num);
-                    } else {
-                        titleEl.innerText = nextEvent.name;
-                    }
+                    titleEl.innerText = nextEvent.num === -1 ? nextEvent.subject : getPairGenitive(nextEvent.num);
                     
                     let timeStr = hours > 0 ? `${hours} ч ${min} мин` : `${min} мин ${String(sec).padStart(2, '0')} сек`;
                     countdownEl.innerText = timeStr;
@@ -868,57 +1181,192 @@
             }
         }
 
-        // --- 8. ПОГОДА (ЧЕРЕЗ ПРОКСИ, ЧТОБЫ РАБОТАЛО В РФ) ---
-        async function fetchWeather() {
-            try {
-                const targetUrl = `https://api.open-meteo.com/v1/forecast?latitude=48.7194&longitude=44.5018&current_weather=true`;
-                const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`);
-                
-                if (!res.ok) throw new Error('Network error');
-                
-                const data = await res.json();
-                const weather = data.current_weather;
-                
-                const temp = Math.round(weather.temperature);
-                const wind = Math.round(weather.windspeed / 3.6); // км/ч -> м/с
-                const code = weather.weathercode;
-                
-                let desc = "Ясно", icon = "fa-sun";
-                if (code > 0 && code <= 3) { desc = "Облачно"; icon = "fa-cloud"; }
-                else if (code >= 45 && code <= 48) { desc = "Туман"; icon = "fa-smog"; }
-                else if (code >= 51 && code <= 67) { desc = "Дождь"; icon = "fa-cloud-rain"; }
-                else if (code >= 71 && code <= 77) { desc = "Снег"; icon = "fa-snowflake"; }
-                else if (code >= 95) { desc = "Гроза"; icon = "fa-bolt"; }
+        function updateBetaTimer() {
+            if (!isBetaOpen) return;
 
-                document.getElementById('weather-temp').innerText = `${temp > 0 ? '+' : ''}${temp}°`;
-                document.getElementById('weather-icon').className = `fas ${icon} text-lg`;
-                document.getElementById('weather-desc').innerText = desc;
-                document.getElementById('weather-wind').innerText = `Ветер: ${wind} м/с`;
+            const now = new Date();
+            const day = now.getDay(); 
+            const week = getBetaWeekNum();
+            
+            const titleEl = document.getElementById('beta-timer-title');
+            const labelEl = document.getElementById('beta-timer-label');
+            const countdownEl = document.getElementById('beta-timer-countdown');
+            const iconEl = document.getElementById('beta-timer-icon');
+            const progressEl = document.getElementById('beta-timer-progress');
 
-                let advice = "";
-                const advices = [
-                    "Оденься легко, на улице тепло.", "Возьми ветровку, может продуть.",
-                    "Надень куртку, прохладно.", "Утеплися, сегодня холодно!",
-                    "Возьми зонт, возможен дождь.", "Надень шапку и шарф.",
-                    "Сегодня отличная погода для прогулки!", "Лучше надеть что-то непромокаемое.",
-                    "Солнечно, не забудь очки.", "Ветрено, выбери куртку поплотнее.",
-                    "Тепло, но вечером похолодает.", "Оденься по погоде, но не кутайся."
-                ];
-
-                if (temp < 0) advice = "Надень пуховик, шапку и перчатки. На улице мороз!";
-                else if (temp < 10) advice = "Прохладно. Лучше надеть куртку и что-то на голову.";
-                else if (temp < 18) advice = "Свежо. Возьми ветровку или легкую куртку.";
-                else if (temp > 25) advice = "Жарко! Выбирай легкую одежду и пей больше воды.";
-                else advice = advices[Math.floor(Math.random() * advices.length)];
-
-                if (wind > 10) advice += " Очень ветрено.";
-                document.getElementById('weather-advice').innerText = advice;
-
-            } catch (e) {
-                document.getElementById('weather-desc').innerText = "Нет данных";
-                document.getElementById('weather-icon').className = "fas fa-wifi text-slate-500 text-lg";
-                document.getElementById('weather-advice').innerText = "Проверь соединение";
+            if (day === 0 || day === 6) {
+                labelEl.innerText = 'Выходной';
+                titleEl.innerText = 'Отдыхай 🌴';
+                countdownEl.innerText = 'Занятий нет';
+                iconEl.className = 'fas fa-cocktail text-sm';
+                progressEl.style.strokeDashoffset = 263.89;
+                return;
             }
+
+            const currentMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+            const daysArr = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница"];
+            const currentDayName = daysArr[day - 1];
+            
+            const todaySchedule = betaData[week][currentDayName] || [];
+            
+            let currentEvent = null;
+            let nextEvent = null;
+
+            for (let i = 0; i < todaySchedule.length; i++) {
+                const item = todaySchedule[i];
+                const times = getBellsTemplate(currentDayName, item.num, '1');
+                
+                if (currentMinutes >= times.s1 && currentMinutes < times.e1) {
+                    currentEvent = { type: '1 часть', subject: item.subj, start: times.s1, end: times.e1 }; break;
+                }
+                if (times.s2 && currentMinutes >= times.e1 && currentMinutes < times.s2) {
+                    currentEvent = { type: 'Перерыв', subject: 'Обед', start: times.e1, end: times.s2 }; break;
+                }
+                if (times.s2 && currentMinutes >= times.s2 && currentMinutes < times.e2) {
+                    currentEvent = { type: '2 часть', subject: item.subj, start: times.s2, end: times.e2 }; break;
+                }
+            }
+
+            if (currentEvent) {
+                const total = currentEvent.end - currentEvent.start;
+                const passed = currentMinutes - currentEvent.start;
+                const left = currentEvent.end - currentMinutes;
+                
+                let min = Math.floor(left);
+                let sec = Math.floor((left - min) * 60);
+                let hours = Math.floor(min / 60);
+                min = min % 60;
+
+                labelEl.innerText = currentEvent.type;
+                titleEl.innerText = currentEvent.subject;
+                
+                let timeStr = hours > 0 ? `${hours} ч ${min} мин` : `${min}:${String(sec).padStart(2, '0')}`;
+                countdownEl.innerText = `До конца: ${timeStr}`;
+                iconEl.className = currentEvent.type === 'Перерыв' ? 'fas fa-mug-hot text-sm' : 'fas fa-book-open text-sm';
+                
+                progressEl.style.strokeDashoffset = 263.89 * (passed / total);
+
+            } else {
+                for (let i = 0; i < todaySchedule.length; i++) {
+                    const item = todaySchedule[i];
+                    const times = getBellsTemplate(currentDayName, item.num, '1');
+                    if (times.s1 > currentMinutes) { nextEvent = { subject: item.subj, start: times.s1, num: item.num }; break; }
+                }
+
+                if (nextEvent) {
+                    const left = nextEvent.start - currentMinutes;
+                    let min = Math.floor(left);
+                    let sec = Math.floor((left - min) * 60);
+                    let hours = Math.floor(min / 60);
+                    min = min % 60;
+                    
+                    labelEl.innerText = 'До начала';
+                    titleEl.innerText = nextEvent.num === 0 ? nextEvent.subject : getPairGenitive(nextEvent.num);
+                    
+                    let timeStr = hours > 0 ? `${hours} ч ${min} мин` : `${min} мин ${String(sec).padStart(2, '0')} сек`;
+                    countdownEl.innerText = timeStr;
+                    iconEl.className = 'fas fa-hourglass-start text-sm';
+                    progressEl.style.strokeDashoffset = 0; 
+                } else {
+                    labelEl.innerText = 'Статус';
+                    titleEl.innerText = 'Занятия окончены 🎉';
+                    countdownEl.innerText = 'Отдыхай!';
+                    iconEl.className = 'fas fa-check-circle text-sm text-green-500';
+                    progressEl.style.strokeDashoffset = 0;
+                }
+            }
+        }
+
+        // --- 9. ПОГОДА ---
+        async function fetchWeather() {
+            const source = document.getElementById('weather-source').value;
+            const descEl = document.getElementById('weather-desc');
+            const iconEl = document.getElementById('weather-icon');
+            const tempEl = document.getElementById('weather-temp');
+            const windEl = document.getElementById('weather-wind');
+            const adviceEl = document.getElementById('weather-advice');
+
+            descEl.innerText = "Загрузка...";
+            iconEl.className = "fas fa-spinner fa-spin text-lg";
+
+            try {
+                if (source === 'open-meteo') {
+                    const targetUrl = `https://api.open-meteo.com/v1/forecast?latitude=48.7194&longitude=44.5018&current_weather=true`;
+                    const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`);
+                    if (!res.ok) throw new Error('Network error');
+                    
+                    const data = await res.json();
+                    const weather = data.current_weather;
+                    
+                    const temp = Math.round(weather.temperature);
+                    const wind = Math.round(weather.windspeed / 3.6);
+                    const code = weather.weathercode;
+                    
+                    let desc = "Ясно", icon = "fa-sun";
+                    if (code > 0 && code <= 3) { desc = "Облачно"; icon = "fa-cloud"; }
+                    else if (code >= 45 && code <= 48) { desc = "Туман"; icon = "fa-smog"; }
+                    else if (code >= 51 && code <= 67) { desc = "Дождь"; icon = "fa-cloud-rain"; }
+                    else if (code >= 71 && code <= 77) { desc = "Снег"; icon = "fa-snowflake"; }
+                    else if (code >= 95) { desc = "Гроза"; icon = "fa-bolt"; }
+
+                    tempEl.innerText = `${temp > 0 ? '+' : ''}${temp}°`;
+                    iconEl.className = `fas ${icon} text-lg`;
+                    descEl.innerText = desc;
+                    windEl.innerText = `Ветер: ${wind} м/с`;
+                    
+                    generateAdvice(temp, wind, adviceEl);
+
+                } else if (source === 'wttr') {
+                    const res = await fetch(`https://wttr.in/Volgograd?format=j1`);
+                    if (!res.ok) throw new Error('Network error');
+                    
+                    const data = await res.json();
+                    const current = data.current_condition[0];
+                    
+                    const temp = Math.round(current.temp_C);
+                    const wind = Math.round(current.windspeedKmph / 3.6);
+                    const descStr = current.weatherDesc[0].value.toLowerCase();
+
+                    let desc = "Ясно", icon = "fa-sun";
+                    if (descStr.includes("cloud") || descStr.includes("overcast")) { desc = "Облачно"; icon = "fa-cloud"; }
+                    else if (descStr.includes("rain") || descStr.includes("drizzle")) { desc = "Дождь"; icon = "fa-cloud-rain"; }
+                    else if (descStr.includes("snow")) { desc = "Снег"; icon = "fa-snowflake"; }
+                    else if (descStr.includes("thunder")) { desc = "Гроза"; icon = "fa-bolt"; }
+                    else if (descStr.includes("mist") || descStr.includes("fog")) { desc = "Туман"; icon = "fa-smog"; }
+
+                    tempEl.innerText = `${temp > 0 ? '+' : ''}${temp}°`;
+                    iconEl.className = `fas ${icon} text-lg`;
+                    descEl.innerText = desc;
+                    windEl.innerText = `Ветер: ${wind} м/с`;
+                    
+                    generateAdvice(temp, wind, adviceEl);
+                }
+            } catch (e) {
+                descEl.innerText = "Нет данных";
+                iconEl.className = "fas fa-wifi text-slate-500 text-lg";
+                adviceEl.innerText = "Проверь соединение";
+            }
+        }
+
+        function generateAdvice(temp, wind, el) {
+            let advice = "";
+            const advices = [
+                "Оденься легко, на улице тепло.", "Возьми ветровку, может продуть.",
+                "Надень куртку, прохладно.", "Утеплися, сегодня холодно!",
+                "Возьми зонт, возможен дождь.", "Надень шапку и шарф.",
+                "Сегодня отличная погода для прогулки!", "Лучше надеть что-то непромокаемое.",
+                "Солнечно, не забудь очки.", "Ветрено, выбери куртку поплотнее.",
+                "Тепло, но вечером похолодает.", "Оденься по погоде, но не кутайся."
+            ];
+
+            if (temp < 0) advice = "Надень пуховик, шапку и перчатки. На улице мороз!";
+            else if (temp < 10) advice = "Прохладно. Лучше надеть куртку и что-то на голову.";
+            else if (temp < 18) advice = "Свежо. Возьми ветровку или легкую куртку.";
+            else if (temp > 25) advice = "Жарко! Выбирай легкую одежду и пей больше воды.";
+            else advice = advices[Math.floor(Math.random() * advices.length)];
+
+            if (wind > 10) advice += " Очень ветрено.";
+            el.innerText = advice;
         }
 
         function updateDate() {
@@ -926,7 +1374,7 @@
             document.getElementById('current-date').innerText = today.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' });
         }
 
-        // --- 9. ПАСХАЛКА ---
+        // --- 10. ПАСХАЛКА ---
         let clickCount = 0;
         let clickTimer;
         const logoEl = document.getElementById('logo-trigger');
@@ -944,9 +1392,13 @@
             }
         });
 
-        // --- 10. ИНИЦИАЛИЗАЦИЯ ---
-        initParticles(); animateParticles(); updateDate(); updateWeekUI(); switchCourse('1'); fetchWeather();
-        setInterval(updateLiveTimer, 1000);
+        // --- 11. ИНИЦИАЛИЗАЦИЯ ---
+        initParticles(); animateParticles(); updateDate(); updateWeekUI(); fetchWeather();
+        switchCourse('1'); // Инициализация основного расписания звонков
+        setInterval(() => {
+            updateLiveTimer();
+            if (isBetaOpen) updateBetaTimer();
+        }, 1000);
     </script>
 </body>
 </html>
